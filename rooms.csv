@@ -1,9 +1,13 @@
 id,name,capacity,building,room_type
-AUD_CENTRAL,Dr. APJ Abdul Kalam Central Auditorium,250,Convention Centre,Central Auditorium
-HALL_CONVOC,Sir C.V. Raman Convocational Exam Hall,180,Academic Block A,Main Examination Hall
-LH_MEGHA_101,Meghnad Saha Mega Lecture Theatre 101,120,Science Complex,Tiered Lecture Theatre
-LH_ARYAB_201,Aryabhata Lecture Hall 201,90,Engineering Block B,Standard Exam Hall
-LH_BHASK_301,Bhaskara Lecture Hall 301,75,Engineering Block B,Standard Exam Hall
-LAB_TURING_CS,Alan Turing High-Performance Computing Lab,60,CS & AI Complex,Computer Examination Lab
-LAB_LOVELACE_AI,Ada Lovelace AI & Data Science Lab,50,CS & AI Complex,Computer Examination Lab
-SEMINAR_VISVES_401,Sir M. Visvesvaraya Seminar Complex 401,50,Admin & Exam Block,Exam Seminar Hall
+AUDIT_01,Dr. APJ Abdul Kalam Central Auditorium,300,Convention Centre,Central Auditorium
+HALL_A,Mahatma Gandhi Convocational Hall,250,Academic Block A,Main Examination Hall
+HALL_B,Sir C.V. Raman Examination Hall,200,Academic Block B,Main Examination Hall
+LT_101,Aryabhata Lecture Theatre 101,120,Science Complex,Tiered Lecture Theatre
+LT_102,Brahmagupta Lecture Theatre 102,100,Science Complex,Tiered Lecture Theatre
+LH_201,Ramanujan Lecture Hall 201,80,Engineering Block A,Standard Exam Hall
+LH_202,Hypatia Lecture Hall 202,75,Engineering Block A,Standard Exam Hall
+LH_301,Noether Lecture Hall 301,60,Engineering Block B,Standard Exam Hall
+LAB_CS1,Alan Turing High-Performance Computing Lab,50,CS & AI Complex,Computer Examination Lab
+LAB_CS2,Ada Lovelace AI & Data Science Lab,45,CS & AI Complex,Computer Examination Lab
+LAB_IT1,Grace Hopper Software Development Lab,40,IT Block,Computer Examination Lab
+SEM_401,Visvesvaraya Seminar Complex 401,30,Admin & Exam Block,Exam Seminar Hall

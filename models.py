@@ -1,14 +1,15 @@
 """
 models.py
 ---------
-Core Domain Models and Data Structures for Intelligent Exam Timetable Scheduling.
+Core Domain Models and Data Structures for Enterprise University Exam Scheduling.
 
-Defines entities: Course, Student, Room, TimeSlot, RoomSeatAllocation, and Assignment
-representations used throughout the graph builder, optimization engines, and validation layers.
+Defines entities: Course, Student, Room, TimeSlot, RoomSeatAllocation, StudentSeatAssignment,
+ExamManifest, and ScheduleResult representations used throughout the graph builder,
+optimization engines, seating allocation, and validation layers.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Set, Dict, Optional, Any
+from typing import List, Set, Dict, Optional, Any, Tuple
 
 
 @dataclass
@@ -19,7 +20,7 @@ class Course:
     name: str
     department: str = "Computer Science & Engineering"
     credits: int = 4
-    academic_year: str = "Year 3"
+    academic_year: str = "Third Year"
     semester: str = "Semester 5"
     paper_code: str = ""  # For Anti-Paper-Leak synchronization (defaults to code)
     enrolled_students: Set[str] = field(default_factory=set)
@@ -43,11 +44,11 @@ class Course:
 
 @dataclass
 class Student:
-    """Represents a student enrolled across multiple courses."""
-    id: str
+    """Represents a student enrolled across multiple courses with institutional PRN."""
+    id: str  # Institutional PRN (e.g., '2024BCSE001', '2025BIT015')
     name: str
     branch: str = "Computer Science & Engineering"
-    academic_year: str = "Year 3"
+    academic_year: str = "Third Year"
     semester: str = "Semester 5"
     section: str = "Section A"
     enrolled_courses: Set[str] = field(default_factory=set)
@@ -58,15 +59,34 @@ class Student:
 
 @dataclass
 class Room:
-    """Represents an examination hall with seating capacity."""
+    """Represents an examination hall or computer lab with physical seating capacity."""
     id: str
     name: str
     capacity: int
-    building: str = "Main Block"
+    building: str = "Main Academic Complex"
     room_type: str = "Exam Hall"
 
     def __hash__(self):
         return hash(self.id)
+
+
+@dataclass
+class StudentSeatAssignment:
+    """Specific physical desk/bench assignment for a student during an examination session."""
+    seat_number: int            # Numeric seat index: 1, 2, 3...
+    seat_label: str             # e.g., 'AUD-S001', 'LH101-D015'
+    student_id: str             # PRN
+    student_name: str
+    branch: str
+    academic_year: str
+    course_id: str
+    course_code: str
+    course_title: str
+    room_id: str
+    room_name: str
+    slot_id: int
+    calendar_date: str = ""
+    time_window: str = ""
 
 
 @dataclass
@@ -76,6 +96,7 @@ class RoomSeatAllocation:
     room_name: str
     capacity: int
     allocated_seats: int
+    student_assignments: List[StudentSeatAssignment] = field(default_factory=list)
 
     @property
     def is_valid(self) -> bool:
@@ -100,13 +121,18 @@ class TimeSlot:
 
 
 @dataclass
-class ExamAssignment:
-    """Represents a scheduled course with its assigned time slot and rooms."""
-    course_id: str
+class ExamManifest:
+    """Official Examination Room Attendance Manifest for invigilators."""
     slot_id: int
-    rooms: List[str]
-    seat_allocations: List[RoomSeatAllocation]
-    student_count: int
+    room_id: str
+    room_name: str
+    calendar_date: str
+    time_window: str
+    session_name: str
+    total_students: int
+    course_codes: List[str]
+    student_rows: List[StudentSeatAssignment]
+    invigilator_name: str = "Dr. Senior Faculty Invigilator"
 
 
 @dataclass
@@ -126,6 +152,7 @@ class ScheduleMetrics:
     paper_leak_vulnerabilities: int = 0
     multi_room_splits_count: int = 0
     total_seats_allocated: int = 0
+    total_manifests_generated: int = 0
 
 
 @dataclass
@@ -133,9 +160,11 @@ class ScheduleResult:
     """Complete output payload returned by scheduling algorithms."""
     course_to_slot: Dict[str, int]
     slot_to_courses: Dict[int, List[str]]
-    room_allocations: Dict[str, List[str]]                         # course_id -> list of room_ids
-    room_allocation_details: Dict[str, List[RoomSeatAllocation]]   # course_id -> detailed room allocations
-    time_slots: Dict[int, TimeSlot]                                # slot_id -> TimeSlot metadata
+    room_allocations: Dict[str, List[str]]                                   # course_id -> list of room_ids
+    room_allocation_details: Dict[str, List[RoomSeatAllocation]]             # course_id -> detailed room allocations
+    student_seating_manifests: Dict[str, List[StudentSeatAssignment]]         # course_id -> list of student seat allocations
+    room_manifests: Dict[Tuple[int, str], List[StudentSeatAssignment]]        # (slot_id, room_id) -> list of student seat allocations
+    time_slots: Dict[int, TimeSlot]                                          # slot_id -> TimeSlot metadata
     metrics: ScheduleMetrics
     is_feasible: bool
     details: Dict[str, Any] = field(default_factory=dict)

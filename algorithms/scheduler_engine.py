@@ -32,6 +32,7 @@ from graph_builder import ConflictGraph
 from algorithms.greedy_heuristics import GreedyColoring
 from algorithms.exact_backtracking import BacktrackingCSPSolver
 from algorithms.branch_and_bound import BranchAndBoundColoring
+from seating_allocator import SeatingAllocator
 
 
 class IntelligentExamScheduler:
@@ -160,6 +161,46 @@ class IntelligentExamScheduler:
 
         is_feasible = (clashes == 0) and (room_violations == 0) and (leak_vulns == 0)
 
+        # ---------------- Stage 7: Room-Wise Seating Allocation & Manifest Generation ----------------
+        # Build a preliminary ScheduleResult to pass to SeatingAllocator
+        prelim_schedule = ScheduleResult(
+            course_to_slot=optimized_course_to_slot,
+            slot_to_courses=dict(slot_to_courses),
+            room_allocations=room_allocations,
+            room_allocation_details=room_allocation_details,
+            student_seating_manifests={},
+            room_manifests={},
+            time_slots=time_slots,
+            metrics=ScheduleMetrics(
+                total_slots_used=total_colors,
+                chromatic_number_estimate=total_colors,
+                student_conflict_count=clashes,
+                room_capacity_violations=room_violations,
+                consecutive_exam_penalties=consec_penalties,
+                same_day_exam_penalties=same_day_penalties,
+                slot_distribution_variance=round(variance, 2),
+                execution_time_ms=round(total_time_ms, 2),
+                algorithm_used=algorithm,
+                calendar_days_spanned=calendar_days_spanned,
+                synchronized_papers_count=synced_papers,
+                paper_leak_vulnerabilities=leak_vulns,
+                multi_room_splits_count=split_count,
+                total_seats_allocated=total_seats,
+            ),
+            is_feasible=is_feasible,
+            details=algo_details,
+        )
+
+        allocator = SeatingAllocator(
+            courses=self.courses,
+            students=self.students,
+            rooms=self.rooms,
+            schedule=prelim_schedule,
+        )
+
+        student_seating_manifests, room_manifests = allocator.allocate_seats()
+        total_manifests = len(room_manifests)
+
         metrics = ScheduleMetrics(
             total_slots_used=total_colors,
             chromatic_number_estimate=total_colors,
@@ -175,6 +216,7 @@ class IntelligentExamScheduler:
             paper_leak_vulnerabilities=leak_vulns,
             multi_room_splits_count=split_count,
             total_seats_allocated=total_seats,
+            total_manifests_generated=total_manifests,
         )
 
         return ScheduleResult(
@@ -182,6 +224,8 @@ class IntelligentExamScheduler:
             slot_to_courses=dict(slot_to_courses),
             room_allocations=room_allocations,
             room_allocation_details=room_allocation_details,
+            student_seating_manifests=student_seating_manifests,
+            room_manifests=room_manifests,
             time_slots=time_slots,
             metrics=metrics,
             is_feasible=is_feasible,

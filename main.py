@@ -8,7 +8,8 @@ Demonstrates:
 2. Execution of Greedy Heuristics (Welsh-Powell, DSatur), CSP Backtracking, and Branch & Bound
 3. Enterprise Timetable Presentation with Calendar Dates, Exact Clock Time Windows,
    Academic Year/Semester Metadata, and Strict Room Capacity Distribution
-4. Comprehensive 6-Invariant Integrity Audit including Anti-Paper-Leak Verification
+4. Comprehensive 6-Invariant Integrity Audit including Anti-Paper-Leak Synchronization
+5. Room-Wise Seating Allocation & Attendance Manifests
 """
 
 import sys
@@ -66,9 +67,9 @@ def main():
     print(f"    - Total Vertices (|V|)   : {summary['total_courses']}")
     print(f"    - Total Conflict Edges (|E|): {summary['total_clashes']}")
     print(f"    - Graph Density (D)       : {summary['density']} (Highly Interconnected)")
-    print(f"    - Max Degree Δ(G)         : {summary['max_degree']}")
-    print(f"    - Min Degree δ(G)         : {summary['min_degree']}")
-    print(f"    - Lower Bound ω(G) [Clique]: {summary['clique_lower_bound_omega']} slots (Theoretical Minimum)")
+    print(f"    - Max Degree Delta(G)         : {summary['max_degree']}")
+    print(f"    - Min Degree delta(G)         : {summary['min_degree']}")
+    print(f"    - Lower Bound Omega(G) [Clique]: {summary['clique_lower_bound_omega']} slots (Theoretical Minimum)")
     print(f"    - Sample Maximal Clique   : {summary['sample_max_clique']}")
 
     # Step 3: Comparative Evaluation Across Algorithms
@@ -128,10 +129,11 @@ def main():
 
     course_dict = {c.id: c for c in courses}
     for slot_id in sorted(best_schedule.slot_to_courses.keys()):
-        slot_info = best_schedule.time_slots[slot_id]
-        c_list = best_schedule.slot_to_courses[slot_id]
+        slot_info = best_schedule.time_slots.get(slot_id)
+        if not slot_info:
+            continue
 
-        for i, c_id in enumerate(c_list):
+        for c_id in best_schedule.slot_to_courses[slot_id]:
             c_obj = course_dict[c_id]
 
             # Format room seat breakdown
@@ -140,11 +142,11 @@ def main():
                 f"{a.room_id} [{a.allocated_seats}/{a.capacity}]"
                 for a in alloc_details
             ]
-            rooms_display = ", ".join(room_strs) if room_strs else "None"
+            rooms_display = " | ".join(room_strs) if room_strs else "None"
 
-            slot_label = f"Slot #{slot_id + 1}" if i == 0 else ""
-            date_label = slot_info.formatted_date if i == 0 else ""
-            time_label = slot_info.time_window if i == 0 else ""
+            slot_label = f"Slot #{slot_id + 1}" if best_schedule.slot_to_courses[slot_id].index(c_id) == 0 else ""
+            date_label = slot_info.formatted_date if best_schedule.slot_to_courses[slot_id].index(c_id) == 0 else ""
+            time_label = slot_info.time_window if best_schedule.slot_to_courses[slot_id].index(c_id) == 0 else ""
             level_label = f"{c_obj.academic_year} {c_obj.semester.split()[-1]}"
 
             tt_rows.append([
@@ -177,6 +179,29 @@ def main():
         print(f"    - Strict Room Capacities: SATISFIED (No hall over-allocated)")
         print(f"    - Anti-Paper-Leak Sync  : SATISFIED (Zero cross-session leaks)")
         print(f"    - Calendar Time Windows : SYNTHESIZED ({best_schedule.metrics.calendar_days_spanned} Academic Days)")
+
+    # Step 6: Room-Wise Seating Allocation & Attendance Manifests
+    print(f"\n[6] ROOM-WISE SEATING ALLOCATION & ATTENDANCE MANIFESTS:")
+    from seating_allocator import SeatingAllocator
+    allocator = SeatingAllocator(courses, students, rooms, best_schedule)
+    room_manifests = allocator.generate_room_manifests()
+    student_cards = allocator.generate_student_admit_cards()
+
+    print(f"    - Total Examination Rooms Used : {len(room_manifests)}")
+    print(f"    - Total Student Seating Assignments : {best_schedule.metrics.total_seats_allocated}")
+    print(f"    - Student Admit Cards Generated : {len(student_cards)}")
+
+    # Display sample manifest
+    if room_manifests:
+        sample_key = list(room_manifests.keys())[0]
+        sample_manifest = room_manifests[sample_key]
+        print(f"\n    Sample Room Manifest: {sample_manifest.room_name}")
+        print(f"    - Date: {sample_manifest.calendar_date} | Time: {sample_manifest.time_window}")
+        print(f"    - Session: {sample_manifest.session_name} | Total Students: {sample_manifest.total_students}")
+        print(f"    - Courses: {', '.join(sample_manifest.course_codes)}")
+        print(f"    - Sample Seat Assignments:")
+        for row in sample_manifest.student_rows[:5]:
+            print(f"        Seat {row.seat_label}: {row.student_id} - {row.student_name} ({row.course_code})")
 
     print("\n" + "=" * 100)
 

@@ -298,11 +298,12 @@ with col5:
 
 # ---------------- Main Navigation Tabs ----------------
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "📅 Generated Timetable",
     "🕸️ Conflict Graph & Chromatic Analytics",
     "⚡ Multi-Algorithm Comparison",
     "🛡️ Formal 6-Invariant Audit",
+    "📋 Exam Manifest & Seating Reports",
     "📁 Student Lookup & CSV Hub",
 ])
 
@@ -492,8 +493,127 @@ with tab4:
                 st.write(f"- {err}")
 
 
-# ==================== TAB 5: STUDENT LOOKUP & CSV HUB ====================
+# ==================== TAB 5: EXAM MANIFEST & SEATING REPORTS ====================
 with tab5:
+    st.subheader("📋 Room-Wise Seating Allocation Matrix & Attendance Manifests")
+    st.markdown("Official examination room attendance sheets showing PRN, student name, course code, room name, and invigilator signature columns.")
+
+    # Build seating allocator
+    from seating_allocator import SeatingAllocator
+    allocator = SeatingAllocator(courses, students, rooms, active_schedule)
+    room_manifests = allocator.generate_room_manifests()
+
+    # Display manifest statistics
+    col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+    with col_m1:
+        st.metric(label="Total Students Seated", value=active_schedule.metrics.total_seats_allocated)
+    with col_m2:
+        st.metric(label="Total Rooms Used", value=len(room_manifests))
+    with col_m3:
+        st.metric(label="Multi-Hall Splits", value=active_schedule.metrics.multi_room_splits_count)
+    with col_m4:
+        st.metric(label="Anti-Paper-Leak Sync", value="✅ SYNCHRONIZED" if active_schedule.metrics.paper_leak_vulnerabilities == 0 else "❌ VULNERABLE")
+
+    # Room Manifest Selection
+    st.markdown("---")
+    st.markdown("#### 📄 Room Attendance Manifest Viewer")
+    manifest_keys = list(room_manifests.keys())
+    if manifest_keys:
+        manifest_options = [f"{m.room_name} ({m.room_id}) - {m.formatted_date} - {m.time_window}" for m in room_manifests.values()]
+        selected_manifest_idx = st.selectbox(
+            "Select Examination Room & Session",
+            options=range(len(manifest_options)),
+            format_func=lambda i: manifest_options[i],
+        )
+        selected_key = manifest_keys[selected_manifest_idx]
+        selected_manifest = room_manifests[selected_key]
+
+        # Manifest header
+        col_h1, col_h2 = st.columns([2, 1])
+        with col_h1:
+            st.info(f"**Room:** {selected_manifest.room_name} | **Building:** {next((r.building for r in rooms if r.id == selected_manifest.room_id), 'N/A')}")
+        with col_h2:
+            st.info(f"**Date:** {selected_manifest.calendar_date} | **Time:** {selected_manifest.time_window}")
+
+        st.write(f"**Session:** {selected_manifest.session_name} | **Total Students:** {selected_manifest.total_students} | **Courses:** {', '.join(selected_manifest.course_codes)}")
+
+        # Build manifest DataFrame
+        manifest_rows = []
+        for row in selected_manifest.student_rows:
+            manifest_rows.append({
+                "Seat Label": row.seat_label,
+                "Seat No.": row.seat_number,
+                "PRN": row.student_id,
+                "Student Name": row.student_name,
+                "Branch": row.branch,
+                "Academic Year": row.academic_year,
+                "Course Code": row.course_code,
+                "Course Title": row.course_title,
+                "Invigilator Signature": "",
+            })
+
+        manifest_df = pd.DataFrame(manifest_rows)
+        st.dataframe(manifest_df, use_container_width=True, hide_index=True)
+
+        # Download manifest CSV
+        csv_buffer = io.StringIO()
+        manifest_df.to_csv(csv_buffer, index=False)
+        st.download_button(
+            label=f"📥 Download Room Manifest: {selected_manifest.room_name} (CSV)",
+            data=csv_buffer.getvalue(),
+            file_name=f"room_manifest_{selected_manifest.room_id}_{selected_manifest.calendar_date.replace('-', '_')}.csv",
+            mime="text/csv",
+        )
+
+    st.markdown("---")
+    st.markdown("#### 🎫 Individual Student Admit Cards")
+    student_cards = allocator.generate_student_admit_cards()
+
+    if student_cards:
+        student_lookup = {s.id: s for s in students}
+        card_options = [f"{student_lookup[sid].name} ({sid}) - {student_lookup[sid].branch}" for sid in student_cards.keys()]
+        selected_card_idx = st.selectbox(
+            "Select Student to Generate Admit Card",
+            options=range(len(card_options)),
+            format_func=lambda i: card_options[i],
+            key="admit_card_selector",
+        )
+        selected_sid = list(student_cards.keys())[selected_card_idx]
+        selected_student = student_lookup[selected_sid]
+        card_rows = student_cards[selected_sid]
+
+        st.write(f"**Student:** {selected_student.name} | **PRN:** {selected_student.id} | **Branch:** {selected_student.branch}")
+        st.write(f"**Academic Level:** {selected_student.academic_year} | {selected_student.semester} | {selected_student.section}")
+
+        admit_rows = []
+        for assignment in card_rows:
+            admit_rows.append({
+                "Course Code": assignment.course_code,
+                "Course Title": assignment.course_title,
+                "Date": assignment.calendar_date,
+                "Time Window": assignment.time_window,
+                "Session": assignment.session_name,
+                "Room Name": assignment.room_name,
+                "Room ID": assignment.room_id,
+                "Seat Label": assignment.seat_label,
+            })
+
+        admit_df = pd.DataFrame(admit_rows)
+        st.dataframe(admit_df, use_container_width=True, hide_index=True)
+
+        # Download admit card CSV
+        csv_buffer = io.StringIO()
+        admit_df.to_csv(csv_buffer, index=False)
+        st.download_button(
+            label=f"📥 Download Admit Card: {selected_student.name} (CSV)",
+            data=csv_buffer.getvalue(),
+            file_name=f"admit_card_{selected_student.id}.csv",
+            mime="text/csv",
+        )
+
+
+# ==================== TAB 6: STUDENT LOOKUP & CSV HUB ====================
+with tab6:
     st.subheader("Personalized Student Exam Pass & Academic CSV Repository")
 
     col_s1, col_s2 = st.columns(2)

@@ -1,13 +1,19 @@
 id,code,name,department,credits,academic_year,semester,paper_code
-CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4,Year 3,Semester 5,P-CS301-COMMON
-CS302,CS302,Operating Systems & Systems Programming,Computer Science & Engineering,4,Year 3,Semester 5,P-CS302-COMMON
-CS303,CS303,Database Management Systems & SQL,Computer Science & Engineering,3,Year 3,Semester 5,P-CS303-COMMON
-CS304,CS304,Software Engineering & Cloud Architecture,Computer Science & Engineering,3,Year 3,Semester 5,P-CS304-ELEC
-AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4,Year 3,Semester 5,P-AI301-COMMON
-AI302,AI302,Machine Learning & Pattern Recognition,AI & Machine Learning,4,Year 3,Semester 5,P-AI302-COMMON
-AI303,AI303,Deep Learning & Neural Architectures,AI & Machine Learning,3,Year 3,Semester 5,P-AI303-ELEC
-DS301,DS301,Big Data Analytics & Data Mining,Data Science & Analytics,3,Year 3,Semester 5,P-DS301-COMMON
-DS302,DS302,Applied Statistics & Stochastic Modeling,Data Science & Analytics,3,Year 3,Semester 5,P-DS302-COMMON
-IT301,IT301,Computer Networks & Distributed Systems,Information Technology,4,Year 3,Semester 5,P-IT301-COMMON
-EC301,EC301,Microprocessors & Embedded Systems,Electronics & Communication,4,Year 3,Semester 5,P-EC301-COMMON
-MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4,Year 3,Semester 5,P-MA301-COMMON
+FY101,FY101,Engineering Mathematics I,First Year Engineering,4,First Year,Semester 1,P-COMMON-MATH1
+FY102,FY102,Engineering Physics I,First Year Engineering,3,First Year,Semester 1,P-COMMON-PHYS1
+FY103,FY103,Programming Fundamentals & C,First Year Engineering,4,First Year,Semester 2,P-COMMON-PROG
+SY201,SY201,Data Structures & Algorithms,Computer Science & Engineering,4,Second Year,Semester 3,P-CSE201-DSA
+SY202,SY202,Discrete Mathematics,Mathematics & Computing,3,Second Year,Semester 3,P-COMMON-DISCMATH
+SY203,SY203,Digital Logic Design,Electronics & Communication,4,Second Year,Semester 4,P-ECE203-DLD
+TY301,TY301,Operating Systems & Systems Programming,Computer Science & Engineering,4,Third Year,Semester 5,P-CSE301-OS
+TY302,TY302,Database Management Systems,Computer Science & Engineering,3,Third Year,Semester 5,P-CSE302-DBMS
+TY303,TY303,Artificial Intelligence & Expert Systems,AI & Machine Learning,4,Third Year,Semester 5,P-AIML301-AI
+TY304,TY304,Machine Learning Fundamentals,AI & Machine Learning,4,Third Year,Semester 6,P-AIML302-ML
+TY305,TY305,Big Data Analytics & Mining,Data Science & Analytics,3,Third Year,Semester 6,P-DS301-BigData
+TY306,TY306,Computer Networks & Distributed Systems,Information Technology,4,Third Year,Semester 5,P-IT301-CN
+FY401,FY401,Deep Learning & Neural Architectures,AI & Machine Learning,4,Final Year,Semester 7,P-AIML401-DL
+FY402,FY402,Software Engineering & Cloud Architecture,Computer Science & Engineering,3,Final Year,Semester 7,P-CSE401-SE
+FY403,FY403,Cyber Security & Cryptography,Computer Science & Engineering,4,Final Year,Semester 8,P-CSE402-CYBER
+FY404,FY404,Internet of Things & Embedded Systems,Electronics & Communication,3,Final Year,Semester 8,P-ECE401-IOT
+FY405,FY405,Cloud Computing & DevOps,Information Technology,3,Final Year,Semester 7,P-IT401-CLOUD
+FY406,FY406,Applied Statistics & Stochastic Modeling,Data Science & Analytics,3,Final Year,Semester 7,P-DS401-Stats
