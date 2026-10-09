@@ -622,14 +622,18 @@ with tab5:
         admit_df = pd.DataFrame(admit_rows)
         st.dataframe(admit_df, use_container_width=True, hide_index=True)
 
-        # Download admit card CSV
-        csv_buffer = io.StringIO()
-        admit_df.to_csv(csv_buffer, index=False)
+        # Download admit card as official PDF
+        from hall_ticket_pdf import generate_official_hall_ticket_pdf
+        student_lookup_for_pdf = {s.id: s for s in students}
+        pdf_bytes = generate_official_hall_ticket_pdf(
+            student_lookup_for_pdf[selected_sid],
+            card_rows,
+        )
         st.download_button(
-            label=f"📥 Download Admit Card: {selected_student.name} (CSV)",
-            data=csv_buffer.getvalue(),
-            file_name=f"admit_card_{selected_student.id}.csv",
-            mime="text/csv",
+            label=f"📥 Download Official Hall Ticket (PDF) — {selected_student.name}",
+            data=pdf_bytes,
+            file_name=f"hall_ticket_{selected_student.id}.pdf",
+            mime="application/pdf",
         )
 
 
