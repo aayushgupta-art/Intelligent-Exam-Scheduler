@@ -442,6 +442,62 @@ def load_dataset_from_csv(csv_dir: Optional[str] = None) -> Tuple[List[Course], 
     return courses, students, rooms
 
 
+def generate_synthetic_dataset(
+    num_courses: int = 30,
+    num_students: int = 200,
+    courses_per_student: int = 4,
+    seed: int = 42,
+) -> Tuple[List[Course], List[Student], List[Room]]:
+    """Generates synthetic benchmark graphs for asymptotic complexity experiments."""
+    random.seed(seed)
+
+    departments = ["Computer Science", "AI & Data Science", "Information Technology", "Electronics"]
+    courses = [
+        Course(
+            id=f"CRS_{i:03d}",
+            code=f"C{i:03d}",
+            name=f"Academic Course {i}",
+            department=departments[i % len(departments)],
+            credits=3 + (i % 2),
+            academic_year="Third Year",
+            semester="Semester 5",
+            paper_code=f"P-C{i:03d}-COMMON",
+        )
+        for i in range(num_courses)
+    ]
+
+    students: List[Student] = []
+    for s_idx in range(num_students):
+        s_id = f"SYN_STU_{s_idx:04d}"
+        enrolled_courses = set(
+            random.sample([c.id for c in courses], min(courses_per_student, num_courses))
+        )
+        students.append(
+            Student(
+                id=s_id,
+                name=f"Synthetic Student {s_idx + 1}",
+                branch="Synthetic Engineering",
+                academic_year="Third Year",
+                semester="Semester 5",
+                section=f"Section {chr(65 + (s_idx % 3))}",
+                enrolled_courses=enrolled_courses,
+            )
+        )
+
+    rooms = [
+        Room(
+            id=f"ROOM_{r}",
+            name=f"Exam Hall {r}",
+            capacity=random.randint(50, 200),
+            building="North Campus",
+            room_type="Exam Hall",
+        )
+        for r in range(max(4, num_courses // 3))
+    ]
+
+    return courses, students, rooms
+
+
 if __name__ == "__main__":
     c_p, s_p, r_p = export_dataset_to_csv()
     print(f"Generated enterprise CSVs in DAA PROJECT:\n - {c_p}\n - {s_p}\n - {r_p}")
