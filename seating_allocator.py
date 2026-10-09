@@ -103,6 +103,7 @@ class SeatingAllocator:
                         slot_id=slot_id,
                         calendar_date=slot_meta.calendar_date,
                         time_window=slot_meta.time_window,
+                        session_name=slot_meta.session_name,
                     )
 
                     seat_assignments.append(assignment)

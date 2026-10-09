@@ -87,6 +87,7 @@ class StudentSeatAssignment:
     slot_id: int
     calendar_date: str = ""
     time_window: str = ""
+    session_name: str = ""  # Session name from time slot
 
 
 @dataclass
