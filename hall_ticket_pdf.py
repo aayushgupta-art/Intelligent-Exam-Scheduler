@@ -207,5 +207,10 @@ def generate_official_hall_ticket_pdf(
     pdf.set_text_color(100, 100, 100)
     pdf.cell(0, 4, "Vishwakarma University - Examination Cell | Official University Document - Not for redistribution without Controller authorization.", 0, 1, "C")
 
-    # Return PDF bytes
-    return pdf.output()
+    # Return PDF as raw bytes for Streamlit download_button
+    pdf_output = pdf.output(dest="S")
+    if isinstance(pdf_output, bytearray):
+        return bytes(pdf_output)
+    if isinstance(pdf_output, str):
+        return pdf_output.encode("latin-1")
+    return bytes(pdf_output)
