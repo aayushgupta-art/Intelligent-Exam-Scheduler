@@ -139,11 +139,19 @@ class SeatingAllocator:
             # Aggregate unique courses in this room/slot
             course_codes = list(set(row.course_code for row in student_rows))
 
+            # Derive formatted date from calendar_date
+            try:
+                from datetime import datetime
+                fd = datetime.strptime(slot_meta.calendar_date, "%Y-%m-%d").strftime("%A, %d %b %Y")
+            except Exception:
+                fd = slot_meta.calendar_date
+
             manifest = ExamManifest(
                 slot_id=slot_id,
                 room_id=room_id,
                 room_name=room_obj.name,
                 calendar_date=slot_meta.calendar_date,
+                formatted_date=fd,
                 time_window=slot_meta.time_window,
                 session_name=slot_meta.session_name,
                 total_students=len(student_rows),

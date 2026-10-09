@@ -133,6 +133,7 @@ class ExamManifest:
     course_codes: List[str]
     student_rows: List[StudentSeatAssignment]
     invigilator_name: str = "Dr. Senior Faculty Invigilator"
+    formatted_date: str = ""         # Human-readable: 'Monday, 16 Nov 2026'
 
 
 @dataclass
