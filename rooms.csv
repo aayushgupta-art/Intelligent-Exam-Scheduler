@@ -1,0 +1,9 @@
+id,name,capacity,building,room_type
+AUD_CENTRAL,Dr. APJ Abdul Kalam Central Auditorium,250,Convention Centre,Central Auditorium
+HALL_CONVOC,Sir C.V. Raman Convocational Exam Hall,180,Academic Block A,Main Examination Hall
+LH_MEGHA_101,Meghnad Saha Mega Lecture Theatre 101,120,Science Complex,Tiered Lecture Theatre
+LH_ARYAB_201,Aryabhata Lecture Hall 201,90,Engineering Block B,Standard Exam Hall
+LH_BHASK_301,Bhaskara Lecture Hall 301,75,Engineering Block B,Standard Exam Hall
+LAB_TURING_CS,Alan Turing High-Performance Computing Lab,60,CS & AI Complex,Computer Examination Lab
+LAB_LOVELACE_AI,Ada Lovelace AI & Data Science Lab,50,CS & AI Complex,Computer Examination Lab
+SEMINAR_VISVES_401,Sir M. Visvesvaraya Seminar Complex 401,50,Admin & Exam Block,Exam Seminar Hall

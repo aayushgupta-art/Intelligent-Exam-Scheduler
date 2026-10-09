@@ -1,0 +1,13 @@
+id,code,name,department,credits
+CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4
+CS302,CS302,Operating Systems & Systems Programming,Computer Science & Engineering,4
+CS303,CS303,Database Management Systems & SQL,Computer Science & Engineering,3
+CS304,CS304,Software Engineering & Cloud Architecture,Computer Science & Engineering,3
+AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4
+AI302,AI302,Machine Learning & Pattern Recognition,AI & Machine Learning,4
+AI303,AI303,Deep Learning & Neural Architectures,AI & Machine Learning,3
+DS301,DS301,Big Data Analytics & Data Mining,Data Science & Analytics,3
+DS302,DS302,Applied Statistics & Stochastic Modeling,Data Science & Analytics,3
+IT301,IT301,Computer Networks & Distributed Systems,Information Technology,4
+EC301,EC301,Microprocessors & Embedded Systems,Electronics & Communication,4
+MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4
