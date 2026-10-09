@@ -1,21 +1,25 @@
 """
 app.py
 ------
-Streamlit Web Application for Intelligent Exam Scheduling System.
-Integrates Graph Colouring, CSP Backtracking, and Branch & Bound Optimization.
+Streamlit Web Application for Enterprise Intelligent Exam Scheduling System.
+Integrates Graph Colouring, CSP Backtracking, and Branch & Bound Optimization with
+Real Calendar Dates, Exact Clock Time Windows, Strict Room Capacity BFD, and
+Anti-Paper-Leak Section Synchronization.
 """
 
 import streamlit as st
 import pandas as pd
 import time
 import io
+import os
+from datetime import datetime, date
 from typing import List, Dict, Tuple, Set
 
 # Import domain modules
-from models import Course, Student, Room, ScheduleResult
+from models import Course, Student, Room, ScheduleResult, RoomSeatAllocation, TimeSlot
 from graph_builder import ConflictGraph
 from algorithms.scheduler_engine import IntelligentExamScheduler
-from sample_data import get_academic_dataset, generate_synthetic_dataset
+from sample_data import get_academic_dataset, generate_synthetic_dataset, load_dataset_from_csv
 from validator import ScheduleValidator
 
 # Optional visualization libraries
@@ -29,7 +33,7 @@ except ImportError:
 
 # Set page config
 st.set_page_config(
-    page_title="Intelligent Exam Scheduler (DAA)",
+    page_title="Intelligent University Exam Scheduler",
     page_icon="🎓",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -39,13 +43,13 @@ st.set_page_config(
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.2rem;
+        font-size: 2.1rem;
         font-weight: 700;
         color: #1E3A8A;
         margin-bottom: 0.2rem;
     }
     .sub-header {
-        font-size: 1.05rem;
+        font-size: 1.0rem;
         color: #4B5563;
         margin-bottom: 1.5rem;
     }
@@ -53,24 +57,17 @@ st.markdown("""
         background-color: #F8FAFC;
         border: 1px solid #E2E8F0;
         border-radius: 8px;
-        padding: 14px;
+        padding: 12px;
         text-align: center;
     }
-    .badge-success {
-        background-color: #DCFCE7;
-        color: #166534;
-        padding: 4px 10px;
-        border-radius: 12px;
+    .badge-sync {
+        background-color: #EFF6FF;
+        color: #1D4ED8;
+        padding: 3px 8px;
+        border-radius: 6px;
         font-weight: 600;
-        font-size: 0.9rem;
-    }
-    .badge-fail {
-        background-color: #FEE2E2;
-        color: #991B1B;
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        border: 1px solid #BFDBFE;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -93,6 +90,9 @@ def parse_uploaded_csvs(
             name=str(row.get("name", row["id"])).strip(),
             department=str(row.get("department", "Engineering")).strip(),
             credits=int(row.get("credits", 4)),
+            academic_year=str(row.get("academic_year", "Year 3")).strip(),
+            semester=str(row.get("semester", "Semester 5")).strip(),
+            paper_code=str(row.get("paper_code", row.get("code", row["id"]))).strip(),
         )
         for _, row in courses_df.iterrows()
     ]
@@ -114,9 +114,20 @@ def parse_uploaded_csvs(
         s_id = str(row["id"]).strip()
         s_name = str(row.get("name", s_id)).strip()
         branch = str(row.get("branch", "General")).strip()
+        academic_year = str(row.get("academic_year", "Year 3")).strip()
+        semester = str(row.get("semester", "Semester 5")).strip()
+        section = str(row.get("section", "Section A")).strip()
         raw_courses = str(row["enrolled_courses"]).split(";")
         enrolled = {c.strip() for c in raw_courses if c.strip()}
-        s_obj = Student(id=s_id, name=s_name, branch=branch, enrolled_courses=enrolled)
+        s_obj = Student(
+            id=s_id,
+            name=s_name,
+            branch=branch,
+            academic_year=academic_year,
+            semester=semester,
+            section=section,
+            enrolled_courses=enrolled,
+        )
         students.append(s_obj)
         for cid in enrolled:
             if cid in course_map:
@@ -128,16 +139,16 @@ def parse_uploaded_csvs(
 def get_csv_templates():
     """Returns downloadable template CSVs for custom data entry."""
     courses_sample = (
-        "id,code,name,department,credits\n"
-        "CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4\n"
-        "AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4\n"
-        "MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4"
+        "id,code,name,department,credits,academic_year,semester,paper_code\n"
+        "CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4,Year 3,Semester 5,P-CS301-COMMON\n"
+        "AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4,Year 3,Semester 5,P-AI301-COMMON\n"
+        "MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4,Year 3,Semester 5,P-MA301-COMMON"
     )
     students_sample = (
-        "id,name,branch,enrolled_courses\n"
-        "2024BCSE001,Aarav Sharma,Computer Science & Engineering,CS301;AI301;MA301\n"
-        "2024BAIML001,Aniruddh Prasad,AI & Machine Learning,CS301;AI301;MA301\n"
-        "2024BIT001,Chetna Rawal,Information Technology,CS301;MA301"
+        "id,name,branch,academic_year,semester,section,enrolled_courses\n"
+        "2024BCSE001,Aarav Sharma,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;AI301;MA301\n"
+        "2024BAIML001,Aniruddh Prasad,AI & Machine Learning,Year 3,Semester 5,Section A,CS301;AI301;MA301\n"
+        "2024BIT001,Chetna Rawal,Information Technology,Year 3,Semester 5,Section A,CS301;MA301"
     )
     rooms_sample = (
         "id,name,capacity,building,room_type\n"
@@ -151,13 +162,14 @@ def get_csv_templates():
 # ---------------- Sidebar Configuration ----------------
 
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/000000/university.png", width=64)
-    st.title("Scheduler Config")
+    st.image("https://img.icons8.com/color/96/000000/university.png", width=60)
+    st.title("Exam Cell Control")
 
     data_source = st.selectbox(
         "📁 Dataset Source",
         [
             "Authentic University Record (12 Courses, 190 Students, 8 Venues)",
+            "Load from Local CSV Files (courses.csv, students.csv, rooms.csv)",
             "Synthetic Graph Generator",
             "Upload Custom CSV Files",
         ],
@@ -166,10 +178,15 @@ with st.sidebar:
     if data_source == "Authentic University Record (12 Courses, 190 Students, 8 Venues)":
         courses, students, rooms = get_academic_dataset()
 
+    elif data_source == "Load from Local CSV Files (courses.csv, students.csv, rooms.csv)":
+        curr_dir = os.path.dirname(os.path.abspath(__file__))
+        courses, students, rooms = load_dataset_from_csv(curr_dir)
+        st.success(f"Loaded {len(courses)} courses, {len(students)} students, {len(rooms)} venues from local CSVs.")
+
     elif data_source == "Synthetic Graph Generator":
         st.subheader("Synthetic Parameters")
         num_c = st.slider("Total Courses (|V|)", min_value=6, max_value=40, value=15, step=1)
-        num_s = st.slider("Total Students (|S|)", min_value=20, max_value=300, value=80, step=10)
+        num_s = st.slider("Total Students (|S|)", min_value=20, max_value=300, value=100, step=10)
         c_per_s = st.slider("Courses per Student", min_value=2, max_value=6, value=4)
         seed = st.number_input("Random Seed", value=42, step=1)
         courses, students, rooms = generate_synthetic_dataset(num_c, num_s, c_per_s, seed)
@@ -192,7 +209,19 @@ with st.sidebar:
             courses, students, rooms = get_academic_dataset()
 
     st.markdown("---")
-    st.subheader("⚙️ Algorithm Selection")
+    st.subheader("📅 Academic Calendar Settings")
+    exam_start_val = st.date_input("Exam Block Start Date", value=date(2026, 11, 16))
+    exam_start_str = exam_start_val.strftime("%Y-%m-%d")
+
+    slots_per_day = st.radio(
+        "Exam Sessions per Day",
+        [2, 3],
+        index=0,
+        format_func=lambda x: "2 Sessions (09:30 AM & 02:00 PM)" if x == 2 else "3 Sessions (09:00 AM, 01:30 PM & 05:30 PM)"
+    )
+
+    st.markdown("---")
+    st.subheader("⚙️ Optimization Algorithm")
     algo_choice = st.selectbox(
         "Choose Primary Algorithm",
         [
@@ -204,13 +233,11 @@ with st.sidebar:
         format_func=lambda x: x[1],
     )[0]
 
-    slots_per_day = st.radio("Exam Slots per Day", [2, 3], index=0, format_func=lambda x: f"{x} Sessions/Day")
-
 
 # ---------------- Header Banner ----------------
 
 st.markdown('<div class="main-header">Intelligent University Exam Scheduling System</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Graph Colouring, Backtracking Constraint Satisfaction & Branch-and-Bound Optimization (DAA Capstone)</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Production Scheduling with Calendar Dates, Clock Timings, Strict Room Bin-Packing & Anti-Paper-Leak Synchronization</div>', unsafe_allow_html=True)
 
 
 # ---------------- Build Conflict Graph & Execute Scheduler ----------------
@@ -218,7 +245,13 @@ st.markdown('<div class="sub-header">Graph Colouring, Backtracking Constraint Sa
 graph = ConflictGraph.build_from_enrollments(courses, students)
 summary = graph.get_summary_dict()
 
-scheduler = IntelligentExamScheduler(courses, students, rooms, slots_per_day=slots_per_day)
+scheduler = IntelligentExamScheduler(
+    courses=courses,
+    students=students,
+    rooms=rooms,
+    slots_per_day=slots_per_day,
+    exam_start_date=exam_start_str,
+)
 active_schedule = scheduler.generate_schedule(algorithm=algo_choice)
 is_valid, error_log, audit_summary = ScheduleValidator.validate(active_schedule, courses, students, rooms, graph)
 
@@ -235,23 +268,24 @@ with col1:
     )
 with col2:
     st.metric(
-        label="Conflict Edges (|E|)",
-        value=graph.edge_count,
-        delta=f"Density: {graph.density():.2f}",
-        help="Pairs of courses sharing enrolled students",
+        label="Total Students (|S|)",
+        value=len(students),
+        delta=f"Clashes: {graph.edge_count} Edges",
+        help="Enrolled students across academic branches",
     )
 with col3:
     st.metric(
-        label="Slots Used (k)",
+        label="Exam Slots (k)",
         value=active_schedule.metrics.total_slots_used,
         delta=f"Lower Bound ω: {summary['clique_lower_bound_omega']}",
-        help="Minimum chromatic number slots required",
+        help="Total time slots required (Chromatic Number)",
     )
 with col4:
     st.metric(
-        label="Execution Time",
-        value=f"{active_schedule.metrics.execution_time_ms:.1f} ms",
-        help="Time taken by the optimization algorithm",
+        label="Calendar Duration",
+        value=f"{active_schedule.metrics.calendar_days_spanned} Days",
+        delta=f"From {exam_start_val.strftime('%d %b %Y')}",
+        help="Academic exam period duration",
     )
 with col5:
     status_label = "✅ 100% Conflict-Free" if is_valid else "❌ Conflicts Detected"
@@ -268,51 +302,69 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📅 Generated Timetable",
     "🕸️ Conflict Graph & Chromatic Analytics",
     "⚡ Multi-Algorithm Comparison",
-    "🛡️ Formal Invariant Audit",
-    "📁 CSV Templates & Student Lookup",
+    "🛡️ Formal 6-Invariant Audit",
+    "📁 Student Lookup & CSV Hub",
 ])
 
 
 # ==================== TAB 1: GENERATED TIMETABLE ====================
 with tab1:
-    st.subheader(f"Generated Conflict-Free Exam Timetable ({algo_choice.replace('_', ' ').title()})")
+    st.subheader(f"Generated University Exam Timetable ({algo_choice.replace('_', ' ').title()})")
 
     # Build DataFrame for Timetable
     timetable_data = []
     course_dict = {c.id: c for c in courses}
 
     for slot_id in sorted(active_schedule.slot_to_courses.keys()):
-        day_num = (slot_id // slots_per_day) + 1
-        sess_num = (slot_id % slots_per_day) + 1
-        session_label = f"Session {sess_num} (Morning)" if sess_num == 1 else f"Session {sess_num} (Afternoon)"
+        slot_info = active_schedule.time_slots.get(slot_id)
+        if not slot_info:
+            continue
 
         for c_id in active_schedule.slot_to_courses[slot_id]:
             c_obj = course_dict[c_id]
-            assigned_rooms = ", ".join(active_schedule.room_allocations.get(c_id, ["None"]))
+            allocations = active_schedule.room_allocation_details.get(c_id, [])
+            room_detail_strs = [
+                f"{a.room_name} ({a.room_id}): {a.allocated_seats}/{a.capacity} seats"
+                for a in allocations
+            ]
+            assigned_rooms_str = " | ".join(room_detail_strs) if room_detail_strs else "None"
+
             timetable_data.append({
                 "Slot ID": f"Slot #{slot_id + 1}",
-                "Day": f"Day {day_num}",
-                "Session": session_label,
+                "Calendar Date": slot_info.formatted_date,
+                "Time Window": slot_info.time_window,
+                "Session": slot_info.session_name,
                 "Course Code": c_obj.code,
                 "Course Title": c_obj.name,
-                "Enrolled Students": c_obj.student_count,
-                "Allocated Room(s)": assigned_rooms,
+                "Department": getattr(c_obj, "department", "Engineering"),
+                "Academic Level": f"{getattr(c_obj, 'academic_year', 'Year 3')} ({getattr(c_obj, 'semester', 'Sem 5')})",
+                "Paper Code": getattr(c_obj, "paper_code", c_obj.code),
+                "Headcount": c_obj.student_count,
+                "Allocated Exam Hall(s) & Capacity": assigned_rooms_str,
             })
 
     tt_df = pd.DataFrame(timetable_data)
 
-    # Interactive Filter by Day / Slot
-    col_f1, col_f2 = st.columns([1, 2])
+    # Interactive Filters
+    col_f1, col_f2, col_f3 = st.columns([1, 1, 1])
     with col_f1:
-        selected_day = st.multiselect("Filter by Day", options=tt_df["Day"].unique(), default=tt_df["Day"].unique())
+        date_options = tt_df["Calendar Date"].unique().tolist()
+        selected_dates = st.multiselect("Filter by Exam Date", options=date_options, default=date_options)
     with col_f2:
-        search_query = st.text_input("Search Course Code or Title", "")
+        dept_options = tt_df["Department"].unique().tolist()
+        selected_depts = st.multiselect("Filter by Department", options=dept_options, default=dept_options)
+    with col_f3:
+        search_query = st.text_input("Search Course Code / Title / Paper", "")
 
-    filtered_df = tt_df[tt_df["Day"].isin(selected_day)]
+    filtered_df = tt_df[
+        (tt_df["Calendar Date"].isin(selected_dates)) &
+        (tt_df["Department"].isin(selected_depts))
+    ]
     if search_query:
         filtered_df = filtered_df[
             filtered_df["Course Code"].str.contains(search_query, case=False) |
-            filtered_df["Course Title"].str.contains(search_query, case=False)
+            filtered_df["Course Title"].str.contains(search_query, case=False) |
+            filtered_df["Paper Code"].str.contains(search_query, case=False)
         ]
 
     st.dataframe(filtered_df, use_container_width=True, hide_index=True)
@@ -321,21 +373,21 @@ with tab1:
     csv_buffer = io.StringIO()
     tt_df.to_csv(csv_buffer, index=False)
     st.download_button(
-        label="📥 Download Timetable as CSV",
+        label="📥 Download Complete Master Timetable as CSV",
         data=csv_buffer.getvalue(),
-        file_name="exam_schedule_optimized.csv",
+        file_name="university_exam_master_timetable.csv",
         mime="text/csv",
     )
 
 
 # ==================== TAB 2: CONFLICT GRAPH & CHROMATIC ANALYTICS ====================
 with tab2:
-    st.subheader("Conflict Graph Formulation & Chromatic Analysis")
+    st.subheader("Conflict Graph Formulation & Chromatic Analytics")
 
     col_g1, col_g2 = st.columns([1, 1])
 
     with col_g1:
-        st.markdown("#### Graph Theoretical Metrics")
+        st.markdown("#### Graph Theoretical Properties")
         st.write(f"- **Total Course Vertices ($|V|$):** `{summary['total_courses']}`")
         st.write(f"- **Total Conflict Clashes ($|E|$):** `{summary['total_clashes']}`")
         st.write(f"- **Graph Density ($D = \\frac{{2|E|}}{{|V|(|V|-1)}}$):** `{summary['density']}`")
@@ -343,10 +395,10 @@ with tab2:
         st.write(f"- **Min Degree $\\delta(G)$:** `{summary['min_degree']}`")
         st.write(f"- **Maximal Clique Lower Bound $\\omega(G)$:** `{summary['clique_lower_bound_omega']}` slots")
         st.write(f"- **Identified Max Clique:** `{', '.join(summary['sample_max_clique'])}`")
-        st.write(f"- **Achieved Chromatic Number $\\chi(G)$:** `{active_schedule.metrics.total_slots_used}` slots")
+        st.write(f"- **Chromatic Number Achieved $\\chi(G)$:** `{active_schedule.metrics.total_slots_used}` slots")
 
         if summary['clique_lower_bound_omega'] == active_schedule.metrics.total_slots_used:
-            st.success("🎯 **Optimality Certified:** $\\omega(G) = \\chi(G)$ (Theoretical Minimum Achieved!)")
+            st.success("🎯 **Optimality Certified:** $\\omega(G) = \\chi(G)$ (Exact Theoretical Minimum Achieved!)")
 
     with col_g2:
         st.markdown("#### Visual Conflict Graph")
@@ -370,10 +422,10 @@ with tab2:
                 color_map.append(palette[slot % len(palette)])
 
             pos = nx.spring_layout(G, seed=42)
-            nx.draw_networkx_nodes(G, pos, node_color=color_map, node_size=600, ax=ax)
+            nx.draw_networkx_nodes(G, pos, node_color=color_map, node_size=650, ax=ax)
             nx.draw_networkx_edges(G, pos, alpha=0.3, ax=ax)
             nx.draw_networkx_labels(G, pos, font_size=8, font_family="sans-serif", ax=ax)
-            ax.set_title(f"Conflict Graph (Colors = Time Slots)", fontsize=10)
+            ax.set_title("Course Conflict Graph (Colors = Exam Time Slots)", fontsize=10)
             ax.axis("off")
             st.pyplot(fig)
         else:
@@ -382,8 +434,8 @@ with tab2:
 
 # ==================== TAB 3: ALGORITHM COMPARISON ====================
 with tab3:
-    st.subheader("Comparative Evaluation Across All 4 Optimization Algorithms")
-    st.markdown("Evaluates **Welsh-Powell**, **DSatur**, **Exact CSP Backtracking**, and **Branch & Bound** on the current dataset:")
+    st.subheader("Comparative Benchmark Across All 4 Optimization Algorithms")
+    st.markdown("Rigorous benchmark of **Welsh-Powell**, **DSatur**, **Backtracking CSP (MRV+FC)**, and **Branch & Bound** on the current dataset:")
 
     algos = ["welsh_powell", "dsatur", "backtracking", "branch_and_bound"]
     comp_records = []
@@ -398,7 +450,7 @@ with tab3:
             "Student Clashes": sched.metrics.student_conflict_count,
             "Consecutive Exam Fatigue": sched.metrics.consecutive_exam_penalties,
             "Same-Day Fatigue": sched.metrics.same_day_exam_penalties,
-            "Slot Variance": sched.metrics.slot_distribution_variance,
+            "Paper Leak Risk": sched.metrics.paper_leak_vulnerabilities,
             "Status": "PASSED" if is_v else "FAILED",
         })
 
@@ -414,73 +466,79 @@ with tab3:
         st.bar_chart(comp_df.set_index("Algorithm")["Total Slots (k)"])
 
 
-# ==================== TAB 4: FORMAL INVARIANT AUDIT ====================
+# ==================== TAB 4: FORMAL 6-INVARIANT AUDIT ====================
 with tab4:
-    st.subheader("Formal Constraint Verification & Invariant Audit")
-    st.markdown("Automated integrity checks verifying that hard mathematical and physical constraints are satisfied without exception:")
+    st.subheader("Formal 6-Invariant Integrity & Security Audit")
+    st.markdown("Mathematical verification verifying all hard constraints, room capacity invariants, and anti-paper-leak synchronization:")
 
     audit_col1, audit_col2 = st.columns(2)
 
     with audit_col1:
-        st.markdown("#### Audit Checklist")
-        st.write(f"- **Completeness (All Courses Scheduled):** {'✅ PASSED' if audit_summary['total_courses_audited'] == len(courses) else '❌ FAILED'}")
-        st.write(f"- **Conflict-Free Invariant (Student Clashes):** `0 Violations` ✅" if audit_summary['student_clashes'] == 0 else f"`{audit_summary['student_clashes']} Clashes` ❌")
-        st.write(f"- **Graph Adjacency Invariant:** `0 Violations` ✅" if audit_summary['graph_edge_violations'] == 0 else f"`{audit_summary['graph_edge_violations']} Violations` ❌")
-        st.write(f"- **Room Double-Booking Check:** `0 Conflicts` ✅" if audit_summary['room_double_bookings'] == 0 else f"`{audit_summary['room_double_bookings']} Conflicts` ❌")
-        st.write(f"- **Room Capacity Invariant:** `0 Shortages` ✅" if audit_summary['room_capacity_shortages'] == 0 else f"`{audit_summary['room_capacity_shortages']} Shortages` ❌")
+        st.markdown("#### Verification Audit Checklist")
+        st.write(f"1. **Completeness (All Courses Scheduled):** {'✅ PASSED' if audit_summary['total_courses_audited'] == len(courses) else '❌ FAILED'}")
+        st.write(f"2. **Conflict-Free Invariant (Student Clashes):** `0 Violations` ✅" if audit_summary['student_clashes'] == 0 else f"`{audit_summary['student_clashes']} Clashes` ❌")
+        st.write(f"3. **Graph Adjacency Invariant:** `0 Violations` ✅" if audit_summary['graph_edge_violations'] == 0 else f"`{audit_summary['graph_edge_violations']} Violations` ❌")
+        st.write(f"4. **Room Double-Booking Check:** `0 Conflicts` ✅" if audit_summary['room_double_bookings'] == 0 else f"`{audit_summary['room_double_bookings']} Conflicts` ❌")
+        st.write(f"5. **Strict Room Capacity Invariant:** `0 Over-allocations` ✅" if audit_summary['room_overallocations'] == 0 else f"`{audit_summary['room_overallocations']} Over-Allocations` ❌")
+        st.write(f"6. **Anti-Paper-Leak Common Paper Sync:** `100% Synchronized (0 Leak Risks)` ✅" if audit_summary['paper_leak_vulnerabilities'] == 0 else f"`{audit_summary['paper_leak_vulnerabilities']} Vulnerabilities` ❌")
 
     with audit_col2:
         st.markdown("#### Audit Outcome")
         if is_valid:
-            st.success("🎉 **VERIFICATION CERTIFICATE:** The generated timetable strictly satisfies all 5 hard invariants. Zero students have overlapping exams and all physical hall capacities are respected.")
+            st.success("🎉 **ENTERPRISE INTEGRITY CERTIFICATE ISSUED:** The generated schedule strictly adheres to all 6 hard invariants. No student has concurrent exams, all hall capacities are respected, and all common examination papers are 100% synchronized across parallel sections.")
         else:
             st.error("⚠️ Violations detected during validation audit:")
             for err in error_log:
                 st.write(f"- {err}")
 
 
-# ==================== TAB 5: STUDENT LOOKUP & TEMPLATES ====================
+# ==================== TAB 5: STUDENT LOOKUP & CSV HUB ====================
 with tab5:
-    st.subheader("Personalized Student Schedule Lookup & CSV Repository")
+    st.subheader("Personalized Student Exam Pass & Academic CSV Repository")
 
     col_s1, col_s2 = st.columns(2)
 
     with col_s1:
-        st.markdown("#### Individual Student Exam Lookup")
-        student_names = [f"{s.name} ({s.id}) - {getattr(s, 'branch', 'Engineering')}" for s in students]
-        selected_s_str = st.selectbox("Select Student to View Individual Timetable", student_names)
+        st.markdown("#### Individual Student Exam Hall Ticket / Pass")
+        student_display_list = [
+            f"{s.name} ({s.id}) - {getattr(s, 'branch', 'Engg')} [{getattr(s, 'section', 'Sec A')}]"
+            for s in students
+        ]
+        selected_s_str = st.selectbox("Select Student to View Hall Ticket", student_display_list)
 
         selected_s_id = selected_s_str.split("(")[1].split(")")[0].strip()
         selected_student = next((s for s in students if s.id == selected_s_id), None)
 
         if selected_student:
             st.write(f"**Student Name:** {selected_student.name} (`{selected_student.id}`)")
-            st.write(f"**Academic Branch:** {getattr(selected_student, 'branch', 'Engineering')}")
+            st.write(f"**Branch / Cohort:** {getattr(selected_student, 'branch', 'Engineering')}")
+            st.write(f"**Academic Level:** {getattr(selected_student, 'academic_year', 'Year 3')} | {getattr(selected_student, 'semester', 'Semester 5')} | {getattr(selected_student, 'section', 'Section A')}")
             st.write(f"**Enrolled Courses ({len(selected_student.enrolled_courses)}):** {', '.join(sorted(selected_student.enrolled_courses))}")
 
             s_exams = []
             for cid in selected_student.enrolled_courses:
                 if cid in active_schedule.course_to_slot:
                     slot = active_schedule.course_to_slot[cid]
-                    day = (slot // slots_per_day) + 1
-                    sess = (slot % slots_per_day) + 1
+                    slot_meta = active_schedule.time_slots.get(slot)
+                    allocations = active_schedule.room_allocation_details.get(cid, [])
+                    room_str = ", ".join(f"{a.room_name} ({a.room_id})" for a in allocations) if allocations else "TBD"
+
                     s_exams.append({
                         "Course Code": cid,
                         "Course Title": course_dict[cid].name,
                         "Credits": getattr(course_dict[cid], "credits", 4),
-                        "Day": f"Day {day}",
-                        "Session": f"Session {sess}",
-                        "Slot": f"Slot #{slot + 1}",
-                        "Assigned Room(s)": ", ".join(active_schedule.room_allocations.get(cid, [])),
+                        "Date": slot_meta.formatted_date if slot_meta else f"Slot {slot+1}",
+                        "Time Window": slot_meta.time_window if slot_meta else "TBD",
+                        "Session": slot_meta.session_name if slot_meta else f"Slot {slot+1}",
+                        "Assigned Hall(s)": room_str,
                     })
-            s_exams_df = pd.DataFrame(s_exams).sort_values("Slot")
+            s_exams_df = pd.DataFrame(s_exams)
             st.dataframe(s_exams_df, hide_index=True, use_container_width=True)
 
     with col_s2:
-        st.markdown("#### Download Authentic University CSV Records")
-        st.write("Download the current active university dataset records (courses.csv, students.csv, rooms.csv):")
+        st.markdown("#### Live Academic CSV Repository")
+        st.write("Download the active university examination records directly from the database:")
 
-        # Prepare active CSV data
         active_courses_df = pd.DataFrame([
             {
                 "id": c.id,
@@ -488,6 +546,9 @@ with tab5:
                 "name": c.name,
                 "department": getattr(c, "department", "Engineering"),
                 "credits": getattr(c, "credits", 4),
+                "academic_year": getattr(c, "academic_year", "Year 3"),
+                "semester": getattr(c, "semester", "Semester 5"),
+                "paper_code": getattr(c, "paper_code", c.code),
             }
             for c in courses
         ])
@@ -496,6 +557,9 @@ with tab5:
                 "id": s.id,
                 "name": s.name,
                 "branch": getattr(s, "branch", "General"),
+                "academic_year": getattr(s, "academic_year", "Year 3"),
+                "semester": getattr(s, "semester", "Semester 5"),
+                "section": getattr(s, "section", "Section A"),
                 "enrolled_courses": ";".join(sorted(s.enrolled_courses)),
             }
             for s in students
@@ -535,8 +599,8 @@ with tab5:
             )
 
         st.markdown("---")
-        st.markdown("#### Blank / Template CSV Format")
-        st.write("Use these template schemas to format external data for uploading:")
+        st.markdown("#### Download Schema Templates")
+        st.write("Use these schemas to format custom university datasets:")
         c_csv, s_csv, r_csv = get_csv_templates()
 
         t1, t2, t3 = st.columns(3)

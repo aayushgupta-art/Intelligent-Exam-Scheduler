@@ -1,24 +1,27 @@
 """
 validator.py
 ------------
-Formal Invariant Verification & Integrity Checker for Exam Schedules.
+Formal Invariant Verification & Integrity Checker for Enterprise Exam Schedules.
 
-Performs rigorous checks across all academic constraints:
+Performs rigorous formal audits across all academic constraints:
 1. Hard Conflict Invariant: Zero student clashes (No student has overlapping exams).
-2. Graph Adjacency Invariant: Adjacent vertices have strictly distinct colors.
+2. Graph Adjacency Invariant: Adjacent vertices have strictly distinct colors/slots.
 3. Completeness Invariant: All enrolled courses are scheduled exactly once.
 4. Room Double-Booking Invariant: No room is allocated to multiple courses in the same slot.
-5. Capacity Invariant: Allocated rooms provide sufficient seats for enrolled students.
+5. Strict Room Capacity & Headcount Invariant: Every room satisfies (allocated_seats <= room.capacity)
+   and total allocated capacity >= enrolled students.
+6. Anti-Paper-Leak Synchronization Invariant: All sections and cohorts sharing a common exam paper
+   are scheduled at the exact same date, session, and time window.
 """
 
-from typing import List, Dict, Tuple, Set
+from typing import List, Dict, Tuple, Set, Any
 from collections import defaultdict
-from models import Course, Student, Room, ScheduleResult
+from models import Course, Student, Room, ScheduleResult, RoomSeatAllocation
 from graph_builder import ConflictGraph
 
 
 class ScheduleValidator:
-    """Rigorous audit suite to verify all hard and soft constraints of a schedule."""
+    """Rigorous audit suite to verify all hard, capacity, and security constraints."""
 
     @staticmethod
     def validate(
@@ -27,7 +30,7 @@ class ScheduleValidator:
         students: List[Student],
         rooms: List[Room],
         graph: ConflictGraph,
-    ) -> Tuple[bool, List[str], Dict[str, any]]:
+    ) -> Tuple[bool, List[str], Dict[str, Any]]:
         """
         Runs comprehensive validation tests.
 
@@ -62,7 +65,6 @@ class ScheduleValidator:
 
         # ---------------- Check 3: Student-Level Overlap Check ----------------
         student_clashes = 0
-        clashing_students: List[str] = []
         for s in students:
             enrolled = [cid for cid in s.enrolled_courses if cid in slot_map]
             seen_slots: Dict[int, str] = {}
@@ -70,9 +72,8 @@ class ScheduleValidator:
                 slot = slot_map[cid]
                 if slot in seen_slots:
                     student_clashes += 1
-                    clashing_students.append(s.id)
                     error_log.append(
-                        f"[FAIL] Student Clash: Student '{s.name}' ({s.id}) has conflicting exams in Slot {slot}: "
+                        f"[FAIL] Student Clash: Student '{s.name}' ({s.id}, {getattr(s, 'branch', 'Engg')}) has conflicting exams in Slot {slot}: "
                         f"'{seen_slots[slot]}' and '{cid}'"
                     )
                 else:
@@ -92,19 +93,46 @@ class ScheduleValidator:
                         )
                     allocated_rooms_in_slot.add(r_id)
 
-        # ---------------- Check 5: Room Capacity Compliance ----------------
+        # ---------------- Check 5: Strict Room Capacity & Seat Allocation Invariant ----------------
         capacity_shortages = 0
-        for cid, r_ids in schedule.room_allocations.items():
+        individual_overallocations = 0
+
+        for cid, allocations in schedule.room_allocation_details.items():
             if cid in course_map:
                 needed = course_map[cid].student_count
-                total_cap = sum(room_map[rid].capacity for rid in r_ids if rid in room_map)
-                if total_cap < needed:
+                total_allocated_seats = sum(alloc.allocated_seats for alloc in allocations)
+
+                # 5a: Check total capacity vs students needed
+                if total_allocated_seats < needed:
                     capacity_shortages += 1
                     error_log.append(
-                        f"[FAIL] Room Capacity: Course '{cid}' needs {needed} seats but allocated {total_cap} in rooms {r_ids}"
+                        f"[FAIL] Total Room Capacity Shortage: Course '{cid}' needs {needed} seats but allocated only {total_allocated_seats}."
                     )
 
-        is_valid = (len(error_log) == 0)
+                # 5b: Check individual room capacity constraint (allocated_seats <= room.capacity)
+                for alloc in allocations:
+                    if alloc.allocated_seats > alloc.capacity:
+                        individual_overallocations += 1
+                        error_log.append(
+                            f"[FAIL] Room Capacity Over-Allocation: Room '{alloc.room_id}' (Capacity: {alloc.capacity}) assigned {alloc.allocated_seats} seats for course '{cid}'!"
+                        )
+
+        # ---------------- Check 6: Anti-Paper-Leak Common Paper Synchronization ----------------
+        paper_leak_violations = 0
+        paper_to_slots: Dict[str, Set[int]] = defaultdict(set)
+        for c in courses:
+            if c.id in slot_map:
+                p_code = getattr(c, "paper_code", c.code)
+                paper_to_slots[p_code].add(slot_map[c.id])
+
+        for p_code, slots in paper_to_slots.items():
+            if len(slots) > 1:
+                paper_leak_violations += 1
+                error_log.append(
+                    f"[FAIL] Anti-Paper-Leak Violation: Paper '{p_code}' scheduled across multiple distinct slots: {slots}!"
+                )
+
+        is_valid = len(error_log) == 0
 
         summary = {
             "is_valid": is_valid,
@@ -115,7 +143,10 @@ class ScheduleValidator:
             "student_clashes": student_clashes,
             "room_double_bookings": room_clashes,
             "room_capacity_shortages": capacity_shortages,
-            "status": "PASSED (Conflict-Free)" if is_valid else "FAILED",
+            "room_overallocations": individual_overallocations,
+            "paper_leak_vulnerabilities": paper_leak_violations,
+            "anti_paper_leak_status": "SYNCHRONIZED (Zero Leak Risk)" if paper_leak_violations == 0 else "VULNERABLE",
+            "status": "PASSED (100% Conflict-Free & Capacity-Enforced)" if is_valid else "FAILED",
         }
 
         return is_valid, error_log, summary

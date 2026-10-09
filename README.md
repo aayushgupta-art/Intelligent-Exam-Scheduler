@@ -30,12 +30,18 @@ Let $G = (V, E)$ be an undirected, weighted conflict graph:
 * **Edge Weight $w(u, v)$:** The number of mutual students:
   $$w(u, v) = |\text{Enrollment}(u) \cap \text{Enrollment}(v)|$$
 
-### 2.2 Hard Constraints (Invariants)
+### 2.2 Hard Constraints (Formal Invariants)
 1. **Conflict-Free Invariant:** No student shall be scheduled for two exams simultaneously:
    $$\forall (u, v) \in E \implies \text{Slot}(u) \neq \text{Slot}(v)$$
 2. **Completeness Invariant:** Every course $c \in V$ must be scheduled in exactly one slot:
    $$\forall c \in V, \quad |\text{Slot}(c)| = 1, \quad \text{Slot}(c) \in \{0, 1, \dots, k-1\}$$
-3. **Room Capacity & Non-Overlap:** For every slot $t$, the total seating capacity allocated to course $c$ must be $\ge |\text{Enrollment}(c)|$, and no room $r$ can be assigned to multiple courses in the same slot $t$.
+3. **Room Non-Overlap (No Double-Booking):** No room $r$ can be assigned to multiple distinct courses in the same slot $t$:
+   $$\forall c_1 \neq c_2 \text{ scheduled in slot } t \implies \text{Rooms}(c_1) \cap \text{Rooms}(c_2) = \emptyset$$
+4. **Strict Room Capacity Invariant:** For each hall $r$ assigned to course $c$, allocated seats must strictly not exceed hall capacity:
+   $$\forall r \in \text{Rooms}(c), \quad \text{AllocatedSeats}(c, r) \le \text{Capacity}(r)$$
+   $$\sum_{r \in \text{Rooms}(c)} \text{AllocatedSeats}(c, r) \ge |\text{Enrollment}(c)|$$
+5. **Anti-Paper-Leak Synchronization Invariant:** All student cohorts, parallel sections, and branches taking the exact same examination paper must be scheduled at the identical calendar date and clock time window:
+   $$\forall c_1, c_2 \in V \text{ with } \text{PaperCode}(c_1) = \text{PaperCode}(c_2) \implies \text{Slot}(c_1) = \text{Slot}(c_2)$$
 
 ### 2.3 Soft Constraints & Objective Function
 Minimize the weighted multi-objective cost:

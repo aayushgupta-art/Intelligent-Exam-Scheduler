@@ -1,13 +1,13 @@
-id,code,name,department,credits
-CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4
-CS302,CS302,Operating Systems & Systems Programming,Computer Science & Engineering,4
-CS303,CS303,Database Management Systems & SQL,Computer Science & Engineering,3
-CS304,CS304,Software Engineering & Cloud Architecture,Computer Science & Engineering,3
-AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4
-AI302,AI302,Machine Learning & Pattern Recognition,AI & Machine Learning,4
-AI303,AI303,Deep Learning & Neural Architectures,AI & Machine Learning,3
-DS301,DS301,Big Data Analytics & Data Mining,Data Science & Analytics,3
-DS302,DS302,Applied Statistics & Stochastic Modeling,Data Science & Analytics,3
-IT301,IT301,Computer Networks & Distributed Systems,Information Technology,4
-EC301,EC301,Microprocessors & Embedded Systems,Electronics & Communication,4
-MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4
+id,code,name,department,credits,academic_year,semester,paper_code
+CS301,CS301,Data Structures & Algorithms,Computer Science & Engineering,4,Year 3,Semester 5,P-CS301-COMMON
+CS302,CS302,Operating Systems & Systems Programming,Computer Science & Engineering,4,Year 3,Semester 5,P-CS302-COMMON
+CS303,CS303,Database Management Systems & SQL,Computer Science & Engineering,3,Year 3,Semester 5,P-CS303-COMMON
+CS304,CS304,Software Engineering & Cloud Architecture,Computer Science & Engineering,3,Year 3,Semester 5,P-CS304-ELEC
+AI301,AI301,Artificial Intelligence & Expert Systems,AI & Machine Learning,4,Year 3,Semester 5,P-AI301-COMMON
+AI302,AI302,Machine Learning & Pattern Recognition,AI & Machine Learning,4,Year 3,Semester 5,P-AI302-COMMON
+AI303,AI303,Deep Learning & Neural Architectures,AI & Machine Learning,3,Year 3,Semester 5,P-AI303-ELEC
+DS301,DS301,Big Data Analytics & Data Mining,Data Science & Analytics,3,Year 3,Semester 5,P-DS301-COMMON
+DS302,DS302,Applied Statistics & Stochastic Modeling,Data Science & Analytics,3,Year 3,Semester 5,P-DS302-COMMON
+IT301,IT301,Computer Networks & Distributed Systems,Information Technology,4,Year 3,Semester 5,P-IT301-COMMON
+EC301,EC301,Microprocessors & Embedded Systems,Electronics & Communication,4,Year 3,Semester 5,P-EC301-COMMON
+MA301,MA301,Discrete Mathematical Structures & Graph Theory,Mathematics & Computing,4,Year 3,Semester 5,P-MA301-COMMON

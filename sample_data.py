@@ -6,9 +6,11 @@ and synthetic benchmark instances.
 
 Includes:
 1. Authentic 12 Core & Elective Engineering courses across multiple departments
-   (CSE, AIML, CSDS, IT, ECE, MATH) with realistic department codes and credit weights.
+   (CSE, AIML, CSDS, IT, ECE, MATH) with realistic department codes, credits,
+   academic year (Year 3), semester (Semester 5), and common examination paper codes.
 2. Comprehensive student population of 190 students across 6 distinct academic branches
-   with realistic registration numbers, student names, and overlapping elective enrollments.
+   and sections (e.g., CSE Section A/B, AIML Section A, CSDS Section A, IT Section A,
+   ECE Section A, Honors Section H) with realistic enrollment overlaps.
 3. 8 Examination venues comprising Central Auditoriums, Convocational Halls,
    Mega Lecture Theatres, and High-Performance Computer Labs (capacities 50 to 250).
 4. CSV Exporter and Importer utilities for courses.csv, students.csv, and rooms.csv.
@@ -20,6 +22,7 @@ import random
 from typing import List, Tuple, Set, Optional
 from models import Course, Student, Room
 
+DEFAULT_DATA_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ---------------- Authentic University Examination Records ----------------
 
@@ -30,6 +33,9 @@ RAW_COURSES = [
         "name": "Data Structures & Algorithms",
         "department": "Computer Science & Engineering",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-CS301-COMMON",
     },
     {
         "id": "CS302",
@@ -37,6 +43,9 @@ RAW_COURSES = [
         "name": "Operating Systems & Systems Programming",
         "department": "Computer Science & Engineering",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-CS302-COMMON",
     },
     {
         "id": "CS303",
@@ -44,6 +53,9 @@ RAW_COURSES = [
         "name": "Database Management Systems & SQL",
         "department": "Computer Science & Engineering",
         "credits": 3,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-CS303-COMMON",
     },
     {
         "id": "CS304",
@@ -51,6 +63,9 @@ RAW_COURSES = [
         "name": "Software Engineering & Cloud Architecture",
         "department": "Computer Science & Engineering",
         "credits": 3,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-CS304-ELEC",
     },
     {
         "id": "AI301",
@@ -58,6 +73,9 @@ RAW_COURSES = [
         "name": "Artificial Intelligence & Expert Systems",
         "department": "AI & Machine Learning",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-AI301-COMMON",
     },
     {
         "id": "AI302",
@@ -65,6 +83,9 @@ RAW_COURSES = [
         "name": "Machine Learning & Pattern Recognition",
         "department": "AI & Machine Learning",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-AI302-COMMON",
     },
     {
         "id": "AI303",
@@ -72,6 +93,9 @@ RAW_COURSES = [
         "name": "Deep Learning & Neural Architectures",
         "department": "AI & Machine Learning",
         "credits": 3,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-AI303-ELEC",
     },
     {
         "id": "DS301",
@@ -79,6 +103,9 @@ RAW_COURSES = [
         "name": "Big Data Analytics & Data Mining",
         "department": "Data Science & Analytics",
         "credits": 3,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-DS301-COMMON",
     },
     {
         "id": "DS302",
@@ -86,6 +113,9 @@ RAW_COURSES = [
         "name": "Applied Statistics & Stochastic Modeling",
         "department": "Data Science & Analytics",
         "credits": 3,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-DS302-COMMON",
     },
     {
         "id": "IT301",
@@ -93,6 +123,9 @@ RAW_COURSES = [
         "name": "Computer Networks & Distributed Systems",
         "department": "Information Technology",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-IT301-COMMON",
     },
     {
         "id": "EC301",
@@ -100,6 +133,9 @@ RAW_COURSES = [
         "name": "Microprocessors & Embedded Systems",
         "department": "Electronics & Communication",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-EC301-COMMON",
     },
     {
         "id": "MA301",
@@ -107,6 +143,9 @@ RAW_COURSES = [
         "name": "Discrete Mathematical Structures & Graph Theory",
         "department": "Mathematics & Computing",
         "credits": 4,
+        "academic_year": "Year 3",
+        "semester": "Semester 5",
+        "paper_code": "P-MA301-COMMON",
     },
 ]
 
@@ -169,7 +208,6 @@ RAW_ROOMS = [
     },
 ]
 
-# Authentic University Student Cohort Registry (190 Students across 6 Branches)
 COHORT_STUDENT_NAMES = [
     # CSE Cohort (45 students)
     "Aarav Sharma", "Aditi Patel", "Rohan Gupta", "Ananya Iyer", "Aryan Singh",
@@ -236,6 +274,9 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
             name=c["name"],
             department=c["department"],
             credits=c["credits"],
+            academic_year=c.get("academic_year", "Year 3"),
+            semester=c.get("semester", "Semester 5"),
+            paper_code=c.get("paper_code", c["code"]),
         )
         for c in RAW_COURSES
     ]
@@ -256,19 +297,30 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
     students: List[Student] = []
     name_idx = 0
 
-    # --- Cohort 1: B.Tech CSE (45 students) ---
+    # --- Cohort 1: B.Tech CSE (45 students: Sec A 1-25, Sec B 26-45) ---
     # Core: CS301 (DSA), CS302 (OS), CS303 (DBMS), IT301 (Networks), MA301 (Discrete Math)
     # Elective: 25 take CS304 (Software Engg), 20 take AI302 (Machine Learning)
     for i in range(1, 46):
         s_id = f"2024BCSE{i:03d}"
         s_name = COHORT_STUDENT_NAMES[name_idx]
         name_idx += 1
+        sec = "Section A" if i <= 25 else "Section B"
         core_courses = {"CS301", "CS302", "CS303", "IT301", "MA301"}
         elective = {"CS304"} if i <= 25 else {"AI302"}
         enrolled = core_courses | elective
-        students.append(Student(id=s_id, name=s_name, branch="Computer Science & Engineering", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="Computer Science & Engineering",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section=sec,
+                enrolled_courses=enrolled,
+            )
+        )
 
-    # --- Cohort 2: B.Tech AIML (40 students) ---
+    # --- Cohort 2: B.Tech AIML (40 students: Sec A) ---
     # Core: CS301 (DSA), AI301 (AI), AI302 (ML), DS302 (Applied Stats), MA301 (Discrete Math)
     # Elective: 22 take AI303 (Deep Learning), 18 take CS303 (DBMS)
     for i in range(1, 41):
@@ -278,9 +330,19 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
         core_courses = {"CS301", "AI301", "AI302", "DS302", "MA301"}
         elective = {"AI303"} if i <= 22 else {"CS303"}
         enrolled = core_courses | elective
-        students.append(Student(id=s_id, name=s_name, branch="AI & Machine Learning", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="AI & Machine Learning",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section="Section A",
+                enrolled_courses=enrolled,
+            )
+        )
 
-    # --- Cohort 3: B.Tech CSDS (35 students) ---
+    # --- Cohort 3: B.Tech CSDS (35 students: Sec A) ---
     # Core: CS301 (DSA), DS301 (Big Data), DS302 (Applied Stats), CS303 (DBMS), MA301 (Discrete Math)
     # Elective: 20 take AI302 (ML), 15 take CS304 (Software Engg)
     for i in range(1, 36):
@@ -290,9 +352,19 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
         core_courses = {"CS301", "DS301", "DS302", "CS303", "MA301"}
         elective = {"AI302"} if i <= 20 else {"CS304"}
         enrolled = core_courses | elective
-        students.append(Student(id=s_id, name=s_name, branch="Data Science & Analytics", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="Data Science & Analytics",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section="Section A",
+                enrolled_courses=enrolled,
+            )
+        )
 
-    # --- Cohort 4: B.Tech IT (30 students) ---
+    # --- Cohort 4: B.Tech IT (30 students: Sec A) ---
     # Core: CS301 (DSA), CS302 (OS), IT301 (Networks), CS304 (Software Engg), MA301 (Discrete Math)
     # Elective: 16 take DS301 (Big Data), 14 take CS303 (DBMS)
     for i in range(1, 31):
@@ -302,9 +374,19 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
         core_courses = {"CS301", "CS302", "IT301", "CS304", "MA301"}
         elective = {"DS301"} if i <= 16 else {"CS303"}
         enrolled = core_courses | elective
-        students.append(Student(id=s_id, name=s_name, branch="Information Technology", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="Information Technology",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section="Section A",
+                enrolled_courses=enrolled,
+            )
+        )
 
-    # --- Cohort 5: B.Tech ECE (25 students) ---
+    # --- Cohort 5: B.Tech ECE (25 students: Sec A) ---
     # Core: EC301 (Microprocessors), IT301 (Networks), CS302 (OS), MA301 (Discrete Math)
     # Elective: 15 take AI301 (AI), 10 take CS301 (DSA)
     for i in range(1, 26):
@@ -314,9 +396,19 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
         core_courses = {"EC301", "IT301", "CS302", "MA301"}
         elective = {"AI301"} if i <= 15 else {"CS301"}
         enrolled = core_courses | elective
-        students.append(Student(id=s_id, name=s_name, branch="Electronics & Communication", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="Electronics & Communication",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section="Section A",
+                enrolled_courses=enrolled,
+            )
+        )
 
-    # --- Cohort 6: Honors & Dual Degree Program (15 students) ---
+    # --- Cohort 6: Honors & Dual Degree Program (15 students: Sec H) ---
     # Interdisciplinary & Advanced Elective combinations
     for i in range(1, 16):
         s_id = f"2023BHON{i:03d}"
@@ -328,7 +420,17 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
             enrolled = {"AI301", "AI303", "DS302", "EC301"}
         else:
             enrolled = {"CS302", "DS301", "AI302", "CS304"}
-        students.append(Student(id=s_id, name=s_name, branch="Honors & Dual Degree", enrolled_courses=enrolled))
+        students.append(
+            Student(
+                id=s_id,
+                name=s_name,
+                branch="Honors & Dual Degree",
+                academic_year="Year 4",
+                semester="Semester 7",
+                section="Section H",
+                enrolled_courses=enrolled,
+            )
+        )
 
     # Register enrolled students into Course objects
     course_map = {c.id: c for c in courses}
@@ -338,9 +440,6 @@ def get_academic_dataset() -> Tuple[List[Course], List[Student], List[Room]]:
                 course_map[cid].enrolled_students.add(stu.id)
 
     return courses, students, rooms
-
-
-DEFAULT_DATA_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def export_dataset_to_csv(
@@ -368,17 +467,34 @@ def export_dataset_to_csv(
     # 1. Write courses.csv
     with open(courses_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["id", "code", "name", "department", "credits"])
+        writer.writerow(["id", "code", "name", "department", "credits", "academic_year", "semester", "paper_code"])
         for c in courses:
-            writer.writerow([c.id, c.code, c.name, getattr(c, "department", "Engineering"), getattr(c, "credits", 4)])
+            writer.writerow([
+                c.id,
+                c.code,
+                c.name,
+                getattr(c, "department", "Engineering"),
+                getattr(c, "credits", 4),
+                getattr(c, "academic_year", "Year 3"),
+                getattr(c, "semester", "Semester 5"),
+                getattr(c, "paper_code", c.code),
+            ])
 
     # 2. Write students.csv
     with open(students_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["id", "name", "branch", "enrolled_courses"])
+        writer.writerow(["id", "name", "branch", "academic_year", "semester", "section", "enrolled_courses"])
         for s in students:
             courses_str = ";".join(sorted(s.enrolled_courses))
-            writer.writerow([s.id, s.name, getattr(s, "branch", "General"), courses_str])
+            writer.writerow([
+                s.id,
+                s.name,
+                getattr(s, "branch", "General"),
+                getattr(s, "academic_year", "Year 3"),
+                getattr(s, "semester", "Semester 5"),
+                getattr(s, "section", "Section A"),
+                courses_str,
+            ])
 
     # 3. Write rooms.csv
     with open(rooms_path, mode="w", newline="", encoding="utf-8") as f:
@@ -419,6 +535,9 @@ def load_dataset_from_csv(
                     name=row.get("name", row["id"]).strip(),
                     department=row.get("department", "Engineering").strip(),
                     credits=int(row.get("credits", 4)),
+                    academic_year=row.get("academic_year", "Year 3").strip(),
+                    semester=row.get("semester", "Semester 5").strip(),
+                    paper_code=row.get("paper_code", row.get("code", row["id"])).strip(),
                 )
             )
 
@@ -444,9 +563,20 @@ def load_dataset_from_csv(
             s_id = row["id"].strip()
             s_name = row.get("name", s_id).strip()
             branch = row.get("branch", "General").strip()
+            academic_year = row.get("academic_year", "Year 3").strip()
+            semester = row.get("semester", "Semester 5").strip()
+            section = row.get("section", "Section A").strip()
             raw_enrolled = row["enrolled_courses"].split(";")
             enrolled = {c.strip() for c in raw_enrolled if c.strip()}
-            s_obj = Student(id=s_id, name=s_name, branch=branch, enrolled_courses=enrolled)
+            s_obj = Student(
+                id=s_id,
+                name=s_name,
+                branch=branch,
+                academic_year=academic_year,
+                semester=semester,
+                section=section,
+                enrolled_courses=enrolled,
+            )
             students.append(s_obj)
 
             for cid in enrolled:
@@ -476,6 +606,9 @@ def generate_synthetic_dataset(
             name=f"Academic Course {i}",
             department=departments[i % len(departments)],
             credits=3 + (i % 2),
+            academic_year="Year 3",
+            semester="Semester 5",
+            paper_code=f"P-C{i:03d}-COMMON",
         )
         for i in range(num_courses)
     ]
@@ -491,6 +624,9 @@ def generate_synthetic_dataset(
                 id=s_id,
                 name=f"Synthetic Student {s_idx + 1}",
                 branch="Synthetic Engineering",
+                academic_year="Year 3",
+                semester="Semester 5",
+                section=f"Section {chr(65 + (s_idx % 3))}",
                 enrolled_courses=enrolled_courses,
             )
         )

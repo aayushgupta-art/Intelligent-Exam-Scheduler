@@ -1,191 +1,191 @@
-id,name,branch,enrolled_courses
-2024BCSE001,Aarav Sharma,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE002,Aditi Patel,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE003,Rohan Gupta,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE004,Ananya Iyer,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE005,Aryan Singh,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE006,Diya Nair,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE007,Vihaan Reddy,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE008,Ishita Sen,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE009,Kabir Mukherjee,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE010,Riya Joshi,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE011,Dev Malhotra,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE012,Tanvi Deshmukh,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE013,Reyansh Rao,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE014,Meera Kulkarni,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE015,Shaurya Verma,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE016,Pooja Menon,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE017,Siddharth Jain,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE018,Sneha Nambiar,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE019,Atharv Bhat,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE020,Avani Saxena,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE021,Pranav Chawla,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE022,Khushi Agarwal,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE023,Dhruv Hegde,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE024,Kriti Trivedi,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE025,Harsh Vardhan,Computer Science & Engineering,CS301;CS302;CS303;CS304;IT301;MA301
-2024BCSE026,Rashi Kapoor,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE027,Aditya Pillai,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE028,Samaira Bose,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE029,Arjun Dasgupta,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE030,Nisha Choudhury,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE031,Yash Singhania,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE032,Bhavna Mehra,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE033,Manan Goyal,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE034,Lavanya Venkatesh,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE035,Varun Kaushik,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE036,Simran Sandhu,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE037,Rishabh Tiwari,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE038,Disha Pandey,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE039,Tanishq Sethi,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE040,Saumya Mishra,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE041,Nikhil Dutta,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE042,Neha Grover,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE043,Kunal Rastogi,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE044,Palak Ahuja,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BCSE045,Ayush Bhattacharya,Computer Science & Engineering,AI302;CS301;CS302;CS303;IT301;MA301
-2024BAIML001,Aniruddh Prasad,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML002,Shreya Banerjee,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML003,Vedant Kulkarni,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML004,Radhika Mittal,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML005,Parthiv Shah,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML006,Akanksha Goswami,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML007,Harshit Rawat,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML008,Swati Mahajan,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML009,Samarth Soni,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML010,Anwesha Chakraborty,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML011,Tejas Marathe,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML012,Garima Mathur,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML013,Ojas Patil,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML014,Ishani Ghosh,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML015,Chirag Somani,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML016,Muskan Singhal,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML017,Abhay Bhardwaj,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML018,Niharika Saraf,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML019,Samarjit Roy,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML020,Pragya Dwivedi,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML021,Keshav Bajaj,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML022,Vrinda Chopra,AI & Machine Learning,AI301;AI302;AI303;CS301;DS302;MA301
-2024BAIML023,Arnav Jindal,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML024,Mahi Kashyap,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML025,Gaurav Saran,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML026,Hansika Khatri,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML027,Tanmay Vashisht,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML028,Sonali Pradhan,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML029,Utkarsh Srivastava,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML030,Navya Sundaram,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML031,Karthik Natarajan,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML032,Pavithra Sundar,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML033,Prateek Oberoi,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML034,Divya Suri,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML035,Aayush Lodha,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML036,Shambhavi Shukla,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML037,Devansh Kaul,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML038,Jagruti Lal,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML039,Mayank Dogra,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BAIML040,Charu Anand,AI & Machine Learning,AI301;AI302;CS301;CS303;DS302;MA301
-2024BCSDS001,Darshil Modi,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS002,Sanjana Gokhale,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS003,Eeshan Tambe,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS004,Vidhi Somani,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS005,Neil Barua,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS006,Ruchika Sen,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS007,Alok Ranjan,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS008,Trisha Poddar,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS009,Hardik Tandon,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS010,Mallika Sheth,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS011,Raghavendra Shenoy,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS012,Priyanka Kurup,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS013,Sarthak Ganguly,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS014,Jhanvi Morparia,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS015,Kshitij Puranik,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS016,Shraddha Salunkhe,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS017,Vansh Batra,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS018,Ananya Majumdar,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS019,Kushal Chhabra,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS020,Srishti Talwar,Data Science & Analytics,AI302;CS301;CS303;DS301;DS302;MA301
-2024BCSDS021,Jayesh Wadhwa,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS022,Shweta Nayak,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS023,Mihir Merchant,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS024,Tanuja Dube,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS025,Amartya Sen,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS026,Nandini Parekh,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS027,Chinmay Khare,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS028,Urvashi Rathi,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS029,Sahil Duggal,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS030,Richa Sengupta,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS031,Deepak Narang,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS032,Avantika Som,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS033,Sourabh Birje,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS034,Anamika Das,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BCSDS035,Karan Joharilal,Data Science & Analytics,CS301;CS303;CS304;DS301;DS302;MA301
-2024BIT001,Chetna Rawal,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT002,Mohit Grewal,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT003,Saloni Khurana,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT004,Bharat Bhushan,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT005,Ipsita Panda,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT006,Sujay Mukhopadhyay,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT007,Tanya Chadha,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT008,Rahul Nanda,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT009,Shweta Biswas,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT010,Rohitashva Pant,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT011,Shruti Kothari,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT012,Girish Vaidya,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT013,Damini Bhasin,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT014,Sandeep Grewal,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT015,Archana Hegde,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT016,Vikramaditya Sen,Information Technology,CS301;CS302;CS304;DS301;IT301;MA301
-2024BIT017,Purnima Seth,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT018,Abhinav Kaushik,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT019,Leena Gangadharan,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT020,Madhavan Nair,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT021,Meenakshi Sundaram,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT022,Jayant Prabhu,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT023,Shalini Acharya,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT024,Suresh Subramanian,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT025,Padmaja Rangachari,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT026,Hemant Kulkarni,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT027,Vasudha Nadkarni,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT028,Mukund Joshi,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT029,Renuka Oak,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BIT030,Raghavendra Pai,Information Technology,CS301;CS302;CS303;CS304;IT301;MA301
-2024BECE001,Suhasini Kamat,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE002,Vivek Marathe,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE003,Mridula Kulkarni,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE004,Omkar Deshpande,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE005,Ketaki Godbole,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE006,Anil Deshmukh,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE007,Sunita Shinde,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE008,Dilip Mane,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE009,Rekha Patil,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE010,Pramod Jadhav,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE011,Vandana Bhosale,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE012,Chetan Gaikwad,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE013,Sharmila Sawant,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE014,Shrikant Salvi,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE015,Aparna More,Electronics & Communication,AI301;CS302;EC301;IT301;MA301
-2024BECE016,Ravindra Kadam,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE017,Rohini Koli,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE018,Vijay Tawde,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE019,Smita Pawar,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE020,Milind Rane,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE021,Manisha Sathe,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE022,Nilesh Thorat,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE023,Pallavi Ghodke,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE024,Sanjay Kute,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2024BECE025,Jyoti Landge,Electronics & Communication,CS301;CS302;EC301;IT301;MA301
-2023BHON001,Mahendra Dhage,Honors & Dual Degree,AI303;CS304;DS301;EC301
-2023BHON002,Aruna Garje,Honors & Dual Degree,AI303;CS304;DS301;EC301
-2023BHON003,Babasaheb Shinde,Honors & Dual Degree,AI303;CS304;DS301;EC301
-2023BHON004,Chhaya Solanke,Honors & Dual Degree,AI303;CS304;DS301;EC301
-2023BHON005,Govind Gore,Honors & Dual Degree,AI303;CS304;DS301;EC301
-2023BHON006,Sushila Rathod,Honors & Dual Degree,AI301;AI303;DS302;EC301
-2023BHON007,Santosh Chavan,Honors & Dual Degree,AI301;AI303;DS302;EC301
-2023BHON008,Jayshree Gavit,Honors & Dual Degree,AI301;AI303;DS302;EC301
-2023BHON009,Dnyaneshwar Valvi,Honors & Dual Degree,AI301;AI303;DS302;EC301
-2023BHON010,Latika Padvi,Honors & Dual Degree,AI301;AI303;DS302;EC301
-2023BHON011,Subhash Tadvi,Honors & Dual Degree,AI302;CS302;CS304;DS301
-2023BHON012,Sangeeta Vasave,Honors & Dual Degree,AI302;CS302;CS304;DS301
-2023BHON013,Prakash Naik,Honors & Dual Degree,AI302;CS302;CS304;DS301
-2023BHON014,Usha Velip,Honors & Dual Degree,AI302;CS302;CS304;DS301
-2023BHON015,Tukaram Gaonkar,Honors & Dual Degree,AI302;CS302;CS304;DS301
+id,name,branch,academic_year,semester,section,enrolled_courses
+2024BCSE001,Aarav Sharma,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE002,Aditi Patel,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE003,Rohan Gupta,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE004,Ananya Iyer,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE005,Aryan Singh,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE006,Diya Nair,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE007,Vihaan Reddy,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE008,Ishita Sen,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE009,Kabir Mukherjee,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE010,Riya Joshi,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE011,Dev Malhotra,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE012,Tanvi Deshmukh,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE013,Reyansh Rao,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE014,Meera Kulkarni,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE015,Shaurya Verma,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE016,Pooja Menon,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE017,Siddharth Jain,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE018,Sneha Nambiar,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE019,Atharv Bhat,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE020,Avani Saxena,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE021,Pranav Chawla,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE022,Khushi Agarwal,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE023,Dhruv Hegde,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE024,Kriti Trivedi,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE025,Harsh Vardhan,Computer Science & Engineering,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BCSE026,Rashi Kapoor,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE027,Aditya Pillai,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE028,Samaira Bose,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE029,Arjun Dasgupta,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE030,Nisha Choudhury,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE031,Yash Singhania,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE032,Bhavna Mehra,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE033,Manan Goyal,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE034,Lavanya Venkatesh,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE035,Varun Kaushik,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE036,Simran Sandhu,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE037,Rishabh Tiwari,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE038,Disha Pandey,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE039,Tanishq Sethi,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE040,Saumya Mishra,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE041,Nikhil Dutta,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE042,Neha Grover,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE043,Kunal Rastogi,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE044,Palak Ahuja,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BCSE045,Ayush Bhattacharya,Computer Science & Engineering,Year 3,Semester 5,Section B,AI302;CS301;CS302;CS303;IT301;MA301
+2024BAIML001,Aniruddh Prasad,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML002,Shreya Banerjee,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML003,Vedant Kulkarni,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML004,Radhika Mittal,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML005,Parthiv Shah,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML006,Akanksha Goswami,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML007,Harshit Rawat,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML008,Swati Mahajan,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML009,Samarth Soni,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML010,Anwesha Chakraborty,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML011,Tejas Marathe,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML012,Garima Mathur,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML013,Ojas Patil,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML014,Ishani Ghosh,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML015,Chirag Somani,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML016,Muskan Singhal,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML017,Abhay Bhardwaj,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML018,Niharika Saraf,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML019,Samarjit Roy,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML020,Pragya Dwivedi,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML021,Keshav Bajaj,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML022,Vrinda Chopra,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;AI303;CS301;DS302;MA301
+2024BAIML023,Arnav Jindal,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML024,Mahi Kashyap,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML025,Gaurav Saran,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML026,Hansika Khatri,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML027,Tanmay Vashisht,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML028,Sonali Pradhan,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML029,Utkarsh Srivastava,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML030,Navya Sundaram,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML031,Karthik Natarajan,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML032,Pavithra Sundar,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML033,Prateek Oberoi,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML034,Divya Suri,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML035,Aayush Lodha,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML036,Shambhavi Shukla,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML037,Devansh Kaul,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML038,Jagruti Lal,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML039,Mayank Dogra,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BAIML040,Charu Anand,AI & Machine Learning,Year 3,Semester 5,Section A,AI301;AI302;CS301;CS303;DS302;MA301
+2024BCSDS001,Darshil Modi,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS002,Sanjana Gokhale,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS003,Eeshan Tambe,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS004,Vidhi Somani,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS005,Neil Barua,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS006,Ruchika Sen,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS007,Alok Ranjan,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS008,Trisha Poddar,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS009,Hardik Tandon,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS010,Mallika Sheth,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS011,Raghavendra Shenoy,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS012,Priyanka Kurup,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS013,Sarthak Ganguly,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS014,Jhanvi Morparia,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS015,Kshitij Puranik,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS016,Shraddha Salunkhe,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS017,Vansh Batra,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS018,Ananya Majumdar,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS019,Kushal Chhabra,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS020,Srishti Talwar,Data Science & Analytics,Year 3,Semester 5,Section A,AI302;CS301;CS303;DS301;DS302;MA301
+2024BCSDS021,Jayesh Wadhwa,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS022,Shweta Nayak,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS023,Mihir Merchant,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS024,Tanuja Dube,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS025,Amartya Sen,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS026,Nandini Parekh,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS027,Chinmay Khare,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS028,Urvashi Rathi,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS029,Sahil Duggal,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS030,Richa Sengupta,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS031,Deepak Narang,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS032,Avantika Som,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS033,Sourabh Birje,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS034,Anamika Das,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BCSDS035,Karan Joharilal,Data Science & Analytics,Year 3,Semester 5,Section A,CS301;CS303;CS304;DS301;DS302;MA301
+2024BIT001,Chetna Rawal,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT002,Mohit Grewal,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT003,Saloni Khurana,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT004,Bharat Bhushan,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT005,Ipsita Panda,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT006,Sujay Mukhopadhyay,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT007,Tanya Chadha,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT008,Rahul Nanda,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT009,Shweta Biswas,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT010,Rohitashva Pant,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT011,Shruti Kothari,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT012,Girish Vaidya,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT013,Damini Bhasin,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT014,Sandeep Grewal,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT015,Archana Hegde,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT016,Vikramaditya Sen,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS304;DS301;IT301;MA301
+2024BIT017,Purnima Seth,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT018,Abhinav Kaushik,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT019,Leena Gangadharan,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT020,Madhavan Nair,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT021,Meenakshi Sundaram,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT022,Jayant Prabhu,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT023,Shalini Acharya,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT024,Suresh Subramanian,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT025,Padmaja Rangachari,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT026,Hemant Kulkarni,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT027,Vasudha Nadkarni,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT028,Mukund Joshi,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT029,Renuka Oak,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BIT030,Raghavendra Pai,Information Technology,Year 3,Semester 5,Section A,CS301;CS302;CS303;CS304;IT301;MA301
+2024BECE001,Suhasini Kamat,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE002,Vivek Marathe,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE003,Mridula Kulkarni,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE004,Omkar Deshpande,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE005,Ketaki Godbole,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE006,Anil Deshmukh,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE007,Sunita Shinde,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE008,Dilip Mane,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE009,Rekha Patil,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE010,Pramod Jadhav,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE011,Vandana Bhosale,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE012,Chetan Gaikwad,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE013,Sharmila Sawant,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE014,Shrikant Salvi,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE015,Aparna More,Electronics & Communication,Year 3,Semester 5,Section A,AI301;CS302;EC301;IT301;MA301
+2024BECE016,Ravindra Kadam,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE017,Rohini Koli,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE018,Vijay Tawde,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE019,Smita Pawar,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE020,Milind Rane,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE021,Manisha Sathe,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE022,Nilesh Thorat,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE023,Pallavi Ghodke,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE024,Sanjay Kute,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2024BECE025,Jyoti Landge,Electronics & Communication,Year 3,Semester 5,Section A,CS301;CS302;EC301;IT301;MA301
+2023BHON001,Mahendra Dhage,Honors & Dual Degree,Year 4,Semester 7,Section H,AI303;CS304;DS301;EC301
+2023BHON002,Aruna Garje,Honors & Dual Degree,Year 4,Semester 7,Section H,AI303;CS304;DS301;EC301
+2023BHON003,Babasaheb Shinde,Honors & Dual Degree,Year 4,Semester 7,Section H,AI303;CS304;DS301;EC301
+2023BHON004,Chhaya Solanke,Honors & Dual Degree,Year 4,Semester 7,Section H,AI303;CS304;DS301;EC301
+2023BHON005,Govind Gore,Honors & Dual Degree,Year 4,Semester 7,Section H,AI303;CS304;DS301;EC301
+2023BHON006,Sushila Rathod,Honors & Dual Degree,Year 4,Semester 7,Section H,AI301;AI303;DS302;EC301
+2023BHON007,Santosh Chavan,Honors & Dual Degree,Year 4,Semester 7,Section H,AI301;AI303;DS302;EC301
+2023BHON008,Jayshree Gavit,Honors & Dual Degree,Year 4,Semester 7,Section H,AI301;AI303;DS302;EC301
+2023BHON009,Dnyaneshwar Valvi,Honors & Dual Degree,Year 4,Semester 7,Section H,AI301;AI303;DS302;EC301
+2023BHON010,Latika Padvi,Honors & Dual Degree,Year 4,Semester 7,Section H,AI301;AI303;DS302;EC301
+2023BHON011,Subhash Tadvi,Honors & Dual Degree,Year 4,Semester 7,Section H,AI302;CS302;CS304;DS301
+2023BHON012,Sangeeta Vasave,Honors & Dual Degree,Year 4,Semester 7,Section H,AI302;CS302;CS304;DS301
+2023BHON013,Prakash Naik,Honors & Dual Degree,Year 4,Semester 7,Section H,AI302;CS302;CS304;DS301
+2023BHON014,Usha Velip,Honors & Dual Degree,Year 4,Semester 7,Section H,AI302;CS302;CS304;DS301
+2023BHON015,Tukaram Gaonkar,Honors & Dual Degree,Year 4,Semester 7,Section H,AI302;CS302;CS304;DS301
