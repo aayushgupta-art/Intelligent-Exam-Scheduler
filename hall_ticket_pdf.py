@@ -98,8 +98,9 @@ def generate_official_hall_ticket_pdf(
     # Compact header
     pdf.set_fill_color(30, 58, 138)
     pdf.set_text_color(255, 255, 255)
-    pdf.set_font("Helvetica", "B", 6.5)
-    col_w = [26, 30, 22, 22, 36, 44]
+    pdf.set_font("Helvetica", "B", 7)
+    # Widen Session + Room/Seat so full text fits (8pt font, wrapped if needed)
+    col_w = [24, 30, 30, 22, 34, 48]
     headers = ["Date", "Time Window", "Session", "Code", "Course Title", "Room / Seat"]
     for i, h in enumerate(headers):
         pdf.cell(col_w[i], 6, h, 1, 0, "C", fill=True)
