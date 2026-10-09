@@ -42,6 +42,7 @@ def generate_official_hall_ticket_pdf(
     pdf.add_page()
 
     # === STUDENT BIO BOX (clean bordered single box, two-column internal layout) ===
+    pdf.ln(4)
     y_start = pdf.get_y()
     pdf.set_fill_color(245, 247, 250)
     pdf.set_draw_color(30, 58, 138)
