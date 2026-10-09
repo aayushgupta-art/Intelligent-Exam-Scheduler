@@ -553,7 +553,28 @@ with tab5:
             })
 
         manifest_df = pd.DataFrame(manifest_rows)
-        st.dataframe(manifest_df, use_container_width=True, hide_index=True)
+
+        # Search filter for examiners to locate student quickly
+        search_query_manifest = st.text_input(
+            "🔍 Search Student by Name or PRN (Instant Filter)",
+            "",
+            key="manifest_search",
+            help="Type a student's name or PRN (e.g., 'Aarav Sharma' or '2024BCSE001') to filter the seating manifest instantly.",
+        )
+        if search_query_manifest:
+            q = search_query_manifest.lower()
+            filtered_df = manifest_df[
+                manifest_df["Student Name"].str.lower().str.contains(q, na=False) |
+                manifest_df["PRN"].str.lower().str.contains(q, na=False)
+            ]
+            filtered_df = filtered_df.sort_values("Seat No.")
+            if len(filtered_df) == 0:
+                st.info("No matching student found for this manifest.")
+            else:
+                st.success(f"Found {len(filtered_df)} matching seat(s) for '{search_query_manifest}'")
+            st.dataframe(filtered_df, use_container_width=True, hide_index=True)
+        else:
+            st.dataframe(manifest_df, use_container_width=True, hide_index=True)
 
         # Download manifest CSV
         csv_buffer = io.StringIO()
